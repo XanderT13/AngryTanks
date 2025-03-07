@@ -14,9 +14,10 @@ public class AngryTanksModel {
         landscape = new Landscape();
         for (int i = 0; i < amount; i++) {
             String playerName = "Player " + (i + 1);
+            players.add(new Player(playerName));
         }
         landscape.addTanks(players);
-        playGame();
+       // playGame();
     }
 
     public void playGame() {
@@ -43,7 +44,7 @@ public class AngryTanksModel {
     }
 
     public Player checkWinner() {
-        Player player = null;
+       /*Player player = null;
         int alive = 0;
         for (Player p : players) {
             if (!p.getTank().isDead()) {
@@ -54,6 +55,7 @@ public class AngryTanksModel {
         if (alive > 1) {
             player = null;
         }
-        return player;
+        return player;*/
+        return null;
     }
 }
