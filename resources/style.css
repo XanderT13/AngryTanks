@@ -1,0 +1,5 @@
+.start-view {
+    -fx-background-image: url("/startscherm.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
