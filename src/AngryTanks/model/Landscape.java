@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class TerrainModel {
+public class Landscape {
     private char[][] terrain;
     private static final String FILE_PATH = "/terrain_poging1.txt"; // Bestand in resources zetten
 
-    public TerrainModel() {
+    public Landscape() {
         loadTerrain();
     }
 

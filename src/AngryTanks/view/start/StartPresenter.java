@@ -1,7 +1,7 @@
 package AngryTanks.view.start;
 
 import AngryTanks.model.AngryTanksModel;
-import AngryTanks.model.TerrainModel;
+import AngryTanks.model.Landscape;
 import AngryTanks.view.game.GamePresenter;
 import AngryTanks.view.game.GameView;
 import javafx.event.ActionEvent;
@@ -29,7 +29,7 @@ public class StartPresenter {
         view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                TerrainModel terrainModel = new TerrainModel();
+                Landscape terrainModel = new Landscape();
                 int width = terrainModel.getTerrain()[0].length;
                 int height = terrainModel.getTerrain().length;
                 // gameview en presenter aanmaken

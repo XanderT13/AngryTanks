@@ -1,19 +1,17 @@
 package AngryTanks.view.game;
 
 import AngryTanks.model.AngryTanksModel;
-import AngryTanks.model.TerrainModel;
+import AngryTanks.model.Landscape;
 import AngryTanks.view.start.StartView;
 
 public class GamePresenter {
     private AngryTanksModel model;
     private GameView view;
     private StartView startView;
-    private TerrainModel terrainModel;
 
     public GamePresenter(AngryTanksModel model, GameView view) {
         this.model = model;
         this.view = view;
-        this.terrainModel = new TerrainModel();
         this.addEventHandlers();
         this.updateView();
     }
@@ -25,7 +23,7 @@ public class GamePresenter {
     }
     private void updateView() {
         // Vult de view met data uit model
-        view.drawTerrain(terrainModel.getTerrain());
+        view.drawTerrain(model.getLandscape().getTerrain());
     }
     public void addWindowEventHandlers () {
         // Window event handlers (anon. inner klassen)
