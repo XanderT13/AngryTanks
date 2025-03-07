@@ -9,10 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-public class GameView extends StackPane {
+public class GameView extends GridPane {
     // private Node attributen (controls)
     private Canvas canvas;
-    private static final int TILE_SIZE = 40;
+    private static final int TILE_SIZE = 60;
 
     public GameView(int width, int height) {
         canvas = new Canvas(width * TILE_SIZE, height*TILE_SIZE);
@@ -20,6 +20,7 @@ public class GameView extends StackPane {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
 
     public void drawTerrain(char[][] terrain) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -44,11 +45,15 @@ public class GameView extends StackPane {
         // button = new Button("...")
         // label = new Label("...")
 
+
+
+
     }
     private void layoutNodes() {
         // Layout van de Nodes
         // add… methodes (of set…)
         // Insets, padding, alignment, …
+
 
     }
     // implementatie van de nodige
