@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         AngryTanksModel model =
-                new AngryTanksModel();
+                new AngryTanksModel(2);
         StartView view =
                 new StartView();
         StartPresenter presenter =

@@ -4,12 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
-public class TerrainModel {
+public class Landscape {
     private char[][] terrain;
     private static final String FILE_PATH = "/terrain_poging1.txt"; // Bestand in resources zetten
 
-    public TerrainModel() {
+    public Landscape() {
         loadTerrain();
     }
 
@@ -29,8 +30,13 @@ public class TerrainModel {
         }
     }
 
-
     public char[][] getTerrain() {
         return terrain;
+    }
+
+    public void addTanks(List<Player> players) {
+        for (Player player : players) {
+            terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'X';
+        }
     }
 }
