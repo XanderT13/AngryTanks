@@ -22,7 +22,7 @@ public class GamePresenter {
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                model.nextTurn((double) view.getAngleSlider(),(double) view.getVelocitySlider());
+                model.nextTurn(view.getAngleSlider().getValue(),view.getVelocitySlider().getValue());
                 updateView();
             }
         });
@@ -34,8 +34,8 @@ public class GamePresenter {
 
     private void updateView() {
         // Vult de view met data uit model
-        view.getWindLabel().setText(model.getWind());
-        view.getBottomLabel().setText(model.getActivePlayer().playTurn(model.getWind(), (double) view.getAngleSlider(),(double) view.getVelocitySlider()));
+        view.getWindLabel().setText(model.getWind().toString());
+        view.getBottomLabel().setText(model.getActivePlayer().playTurn(model.getWind(), view.getAngleSlider().getValue(),view.getVelocitySlider().getValue()).toString());
         view.drawTerrain(model.getLandscape().getTerrain());
     }
 

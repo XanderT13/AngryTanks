@@ -11,8 +11,8 @@ public class Player {
         this.tank = tank;
     }
 
-    public void playTurn(Wind wind, double angle, double velocity) {
-        new Trajectory(new Shot(angle, velocity), wind, tank);
+    public Trajectory playTurn(Wind wind, double angle, double velocity) {
+        return new Trajectory(new Shot(angle, velocity), wind, tank);
     }
 
     public Tank getTank() {

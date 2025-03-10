@@ -17,6 +17,7 @@ public class AngryTanksModel {
             String playerName = "Player " + (i + 1);
             players.add(new Player(playerName, new Tank(new Coordinates(1, 1))));
         }
+        activePlayer = players.get(0);
         landscape.addTanks(players);
     }
 

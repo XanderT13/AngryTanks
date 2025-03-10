@@ -36,4 +36,14 @@ public class Trajectory {
     public List<Coordinates> getTrajectory() {
         return trajectory;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Trajectory: ");
+        for (Coordinates coord : trajectory) {
+            sb.append("Y: " + coord.getY());
+        }
+        return sb.toString();
+    }
 }

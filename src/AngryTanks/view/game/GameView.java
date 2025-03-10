@@ -49,6 +49,7 @@ public class GameView extends BorderPane {
     public void drawTerrain(char[][] terrain) {
 
     }
+
     private void initialiseNodes() {
         // Initialisatie van de Nodes
         // bvb.:
@@ -78,6 +79,7 @@ public class GameView extends BorderPane {
 
 
     }
+
     private void layoutNodes() {
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
@@ -116,15 +118,15 @@ public class GameView extends BorderPane {
         RowConstraints row3 = new RowConstraints(50);
         RowConstraints row4 = new RowConstraints(50);
         controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
-        controlGrid.add(velocityLabel,0,0);
+        controlGrid.add(velocityLabel, 0, 0);
         controlGrid.setHalignment(velocityLabel, HPos.CENTER);
-        controlGrid.add(angleLabel,1,0);
+        controlGrid.add(angleLabel, 1, 0);
         controlGrid.setHalignment(angleLabel, HPos.CENTER);
-        controlGrid.add(velocitySlider,0,1);
+        controlGrid.add(velocitySlider, 0, 1);
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
-        controlGrid.add(angleSlider,1,1);
+        controlGrid.add(angleSlider, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
-
+        controlGrid.add(fireButton, 0,2);
 
 
         // now we fill the BorderPane and align it
@@ -139,4 +141,67 @@ public class GameView extends BorderPane {
     // implementatie van de nodige
     // package-private Getters
 
+    Label getPlayer1Label() {
+        return player1Label;
+    }
+
+    Label getPlayer2Label() {
+        return player2Label;
+    }
+
+    Label getWindLabel() {
+        return windLabel;
+    }
+
+    Label getVelocityLabel() {
+        return velocityLabel;
+    }
+
+    Label getAngleLabel() {
+        return angleLabel;
+    }
+
+    Slider getAngleSlider() {
+        return angleSlider;
+    }
+
+    Slider getVelocitySlider() {
+        return velocitySlider;
+    }
+
+    Button getSettingsButton() {
+        return settingsButton;
+    }
+
+    Button getFireButton() {
+        return fireButton;
+    }
+
+    Circle getLife1() {
+        return life1;
+    }
+
+    Circle getLife2() {
+        return life2;
+    }
+
+    Circle getLife3() {
+        return life3;
+    }
+
+    Circle getLife4() {
+        return life4;
+    }
+
+    Circle getLife5() {
+        return life5;
+    }
+
+    Circle getLife6() {
+        return life6;
+    }
+
+    Label getBottomLabel() {
+        return bottomLabel;
+    }
 }
