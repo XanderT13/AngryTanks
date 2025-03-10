@@ -5,7 +5,7 @@ public class Shot {
     private double velocity;
 
     public Shot(double angle, double velocity) {
-        this.angle = angle;
+        this.angle = angle * Math.PI / 180;
         this.velocity = velocity;
     }
 

@@ -9,8 +9,7 @@ public class Wind {
     private WindDirection direction;
 
     public Wind (){
-        power = 0;
-        direction = null;
+       generateWind();
     }
 
     public void generateWind() {
@@ -25,5 +24,10 @@ public class Wind {
 
     public WindDirection getDirection() {
         return direction;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("WIND: %.1f: %s", power, direction);
     }
 }
