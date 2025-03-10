@@ -84,7 +84,7 @@ public class GameView extends BorderPane {
         windLabel = new Label("Wind");
         velocitySlider = new Slider();
         angleSlider = new Slider();
-        settingsButton = new Button("Settings");
+        settingsButton = new Button();
         fireButton = new Button("FIRE!");
         controlGrid = new GridPane();
         gameGrid = new GridPane();
@@ -105,12 +105,14 @@ public class GameView extends BorderPane {
     }
 
     private void layoutNodes() {
+        // adding stylesheet
+        this.getStylesheets().add("/style.css");
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
         healthBox1.setSpacing(2);
         healthBox2.setAlignment(Pos.CENTER);
         healthBox2.setSpacing(2);
-        // first we align the Hbox that will be placed in the top of the BorderPane
+        // aligning the topBox
         topBox.setAlignment(Pos.CENTER);
         topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
@@ -123,6 +125,7 @@ public class GameView extends BorderPane {
         velocitySlider.setMinorTickCount(0);
         velocitySlider.setBlockIncrement(1);
         velocitySlider.setShowTickLabels(true);
+        velocitySlider.getStyleClass().add("cool-slider");
 
         angleSlider.setOrientation(Orientation.VERTICAL);
         angleSlider.setMin(0);
@@ -131,6 +134,7 @@ public class GameView extends BorderPane {
         angleSlider.setMinorTickCount(0);
         angleSlider.setBlockIncrement(1);
         angleSlider.setShowTickLabels(true);
+        angleSlider.getStyleClass().add("cool-slider");
 
         // aligning and filling the controlGrid
         controlGrid.setGridLinesVisible(true);
@@ -139,8 +143,8 @@ public class GameView extends BorderPane {
         controlGrid.getColumnConstraints().addAll(column1, column2);
         RowConstraints row1 = new RowConstraints(50);
         RowConstraints row2 = new RowConstraints(350);
-        RowConstraints row3 = new RowConstraints(50);
-        RowConstraints row4 = new RowConstraints(50);
+        RowConstraints row3 = new RowConstraints(100);
+        RowConstraints row4 = new RowConstraints(100);
         controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
         controlGrid.add(velocityLabel, 0, 0);
         controlGrid.setHalignment(velocityLabel, HPos.CENTER);
@@ -150,16 +154,53 @@ public class GameView extends BorderPane {
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
-        fireButton.setPrefSize(80,20);
+        // spicing up the fireButton
+        fireButton.setPrefSize(80,80);
+        fireButton.setStyle("-fx-background-color: lightcoral;" +
+                "-fx-text-fill: white; " +
+                "-fx-background-radius: 50; " + // Zorgt voor ronde knop
+                "-fx-min-width: 50px; " +
+                "-fx-min-height: 50px; " +
+                "-fx-border-radius: 50; " +
+                "-fx-border-color: darkred; " +
+                "-fx-border-width: 2;");
+        fireButton.setOnMouseEntered(e -> fireButton.setStyle(
+                "-fx-background-color: darkred; " +  // Donkerrood bij hover
+                        "-fx-text-fill: white; " +
+                        "-fx-background-radius: 50; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-border-color: darkred; " +
+                        "-fx-border-width: 2;"
+        ));
+        fireButton.setOnMouseExited(e -> fireButton.setStyle(
+                "-fx-background-color: lightcoral; " +  // Terug naar lichtrood
+                        "-fx-text-fill: white; " +
+                        "-fx-background-radius: 50; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-border-color: darkred; " +
+                        "-fx-border-width: 2;"
+        ));
         controlGrid.add(fireButton, 0,2);
         controlGrid.setColumnSpan(fireButton, 2);
         controlGrid.setHalignment(fireButton, HPos.CENTER);
-        settingsButton.setPrefSize(100,50);
+
+        settingsButton.setPrefSize(75,75);
+        settingsButton.getStyleClass().add("settings-button");
+        settingsButton.setOnMouseEntered(e -> settingsButton.setStyle(
+                        "-fx-border-color: Black; " +
+                        "-fx-border-width: 2;"
+        ));
+        settingsButton.setOnMouseExited(e -> settingsButton.setStyle(
+                        "-fx-border-color: lightgray; " +
+                        "-fx-border-width: 2;"
+        ));
         controlGrid.add(settingsButton, 0,3);
         controlGrid.setColumnSpan(settingsButton, 2);
         controlGrid.setHalignment(settingsButton, HPos.CENTER);
-
-
 
 
         // now we fill the BorderPane and align it
