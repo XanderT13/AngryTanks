@@ -14,9 +14,15 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class GameView extends BorderPane {
     // private Node attributen (controls)
+    private static final String FILENAME = "resources/terrain_poging1.txt";
     private Label player1Label;
     private Label player2Label;
     private Label windLabel;
@@ -47,7 +53,25 @@ public class GameView extends BorderPane {
 
 
     public void drawTerrain(char[][] terrain) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+            String line;
+            int row = 0;
 
+            while ((line = br.readLine()) != null && row < 60) {
+                for (int col = 0; col < Math.min(line.length(), 100); col++) {
+                    char ch = line.charAt(col);
+                    Rectangle rect = new Rectangle(10, 10);
+                    if (ch == '#') rect.setFill(Color.DARKGRAY);
+                    if (ch == '.') rect.setFill(Color.DARKGREEN);
+                    if (ch == '-') rect.setFill(Color.LIGHTBLUE);
+                    if (ch == '/') rect.setFill(Color.YELLOW);
+                    gameGrid.add(rect, col, row);
+                }
+                row++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initialiseNodes() {
@@ -83,9 +107,9 @@ public class GameView extends BorderPane {
     private void layoutNodes() {
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
-        healthBox1.setSpacing(5);
+        healthBox1.setSpacing(2);
         healthBox2.setAlignment(Pos.CENTER);
-        healthBox2.setSpacing(5);
+        healthBox2.setSpacing(2);
         // first we align the Hbox that will be placed in the top of the BorderPane
         topBox.setAlignment(Pos.CENTER);
         topBox.setSpacing(50);
@@ -106,7 +130,7 @@ public class GameView extends BorderPane {
         angleSlider.setMajorTickUnit(180);
         angleSlider.setMinorTickCount(0);
         angleSlider.setBlockIncrement(1);
-        velocitySlider.setShowTickLabels(true);
+        angleSlider.setShowTickLabels(true);
 
         // aligning and filling the controlGrid
         controlGrid.setGridLinesVisible(true);
@@ -126,7 +150,16 @@ public class GameView extends BorderPane {
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
+        fireButton.setPrefSize(80,20);
         controlGrid.add(fireButton, 0,2);
+        controlGrid.setColumnSpan(fireButton, 2);
+        controlGrid.setHalignment(fireButton, HPos.CENTER);
+        settingsButton.setPrefSize(100,50);
+        controlGrid.add(settingsButton, 0,3);
+        controlGrid.setColumnSpan(settingsButton, 2);
+        controlGrid.setHalignment(settingsButton, HPos.CENTER);
+
+
 
 
         // now we fill the BorderPane and align it
@@ -135,6 +168,7 @@ public class GameView extends BorderPane {
         this.setCenter(gameGrid);
         this.setRight(controlGrid);
         this.setBottom(bottomLabel);
+        this.setCenter(gameGrid);
 
 
     }
