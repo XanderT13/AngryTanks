@@ -41,8 +41,8 @@ public class Trajectory {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Trajectory: ");
-        for (Coordinates coord : trajectory) {
-            sb.append("Y: " + coord.getY());
+        for (int i = 0; i < 10; i++) {
+            sb.append("Y: " + trajectory.get(i).getY());
         }
         return sb.toString();
     }
