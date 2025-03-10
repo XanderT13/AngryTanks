@@ -14,7 +14,7 @@ public class AngryTanksModel {
         landscape = new Landscape();
         for (int i = 0; i < amount; i++) {
             String playerName = "Player " + (i + 1);
-            players.add(new Player(playerName));
+            players.add(new Player(playerName, new Tank(new Coordinates(1, 1))));
         }
         landscape.addTanks(players);
        // playGame();
@@ -25,7 +25,7 @@ public class AngryTanksModel {
             for (Player player : players) {
                 wind.generateWind();
                 System.out.println("Wind: " + Math.round(wind.getPower()) + ", " + wind.getDirection());
-                player.playTurn(wind);
+                player.playTurn(wind, 10, 10);
             }
         }
         while (checkWinner() == null);
