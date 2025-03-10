@@ -2,13 +2,18 @@ package AngryTanks.model;
 
 public class Tank {
     private boolean isDead;
-    private Coordinaten coordinaten;
+    private Coordinates coordinates;
+
+    public Tank(Coordinates coordinates){
+        this.coordinates = coordinates;
+        isDead = false;
+    }
 
     public boolean isDead() {
         return isDead;
     }
 
-    public Coordinaten getCoordinaten() {
-        return coordinaten;
+    public Coordinates getCoordinaten() {
+        return coordinates;
     }
 }
