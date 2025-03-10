@@ -3,6 +3,8 @@ package AngryTanks.view.game;
 import AngryTanks.model.AngryTanksModel;
 import AngryTanks.model.Landscape;
 import AngryTanks.view.start.StartView;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 public class GamePresenter {
     private AngryTanksModel model;
@@ -15,17 +17,29 @@ public class GamePresenter {
         this.addEventHandlers();
         this.updateView();
     }
+
     private void addEventHandlers() {
+        view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                model.nextTurn((double) view.getAngleSlider(),(double) view.getVelocitySlider());
+                updateView();
+            }
+        });
         // Koppelt event handlers (anon. inner klassen)
         // aan de controls uit de view.
         // Event handlers: roepen methodes aan uit het
         // model en zorgen voor een update van de view.
     }
+
     private void updateView() {
         // Vult de view met data uit model
+        view.getWindLabel().setText(model.getWind());
+        view.getBottomLabel().setText(model.getActivePlayer().playTurn(model.getWind(), (double) view.getAngleSlider(),(double) view.getVelocitySlider()));
         view.drawTerrain(model.getLandscape().getTerrain());
     }
-    public void addWindowEventHandlers () {
+
+    public void addWindowEventHandlers() {
         // Window event handlers (anon. inner klassen)
         // Koppeling via view.getScene().getWindow()
     }

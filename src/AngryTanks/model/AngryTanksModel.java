@@ -7,6 +7,7 @@ public class AngryTanksModel {
     private List<Player> players;
     private Wind wind;
     private Landscape landscape;
+    private Player activePlayer;
 
     public AngryTanksModel(int amount) {
         players = new ArrayList<Player>();
@@ -17,18 +18,19 @@ public class AngryTanksModel {
             players.add(new Player(playerName, new Tank(new Coordinates(1, 1))));
         }
         landscape.addTanks(players);
-       // playGame();
     }
 
-    public void playGame() {
-        do {
-            for (Player player : players) {
-                wind.generateWind();
-                System.out.println("Wind: " + Math.round(wind.getPower()) + ", " + wind.getDirection());
-                player.playTurn(wind, 10, 10);
+    public void nextTurn(double angle, double velocity) {
+        activePlayer.playTurn(wind, angle, velocity);
+        wind.generateWind();
+        if (checkWinner() != null) {
+            return;
+        }
+        for (Player player : players) {
+            if (activePlayer != player) {
+                activePlayer = player;
             }
         }
-        while (checkWinner() == null);
     }
 
     public List<Player> getPlayers() {
@@ -41,6 +43,10 @@ public class AngryTanksModel {
 
     public Landscape getLandscape() {
         return landscape;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 
     public Player checkWinner() {
