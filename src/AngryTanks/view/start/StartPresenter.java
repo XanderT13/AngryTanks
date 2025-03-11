@@ -4,6 +4,8 @@ import AngryTanks.model.AngryTanksModel;
 import AngryTanks.model.Landscape;
 import AngryTanks.view.game.GamePresenter;
 import AngryTanks.view.game.GameView;
+import AngryTanks.view.settings.SettingsPresenter;
+import AngryTanks.view.settings.SettingsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -14,6 +16,8 @@ public class StartPresenter {
     private StartView view;
     private GameView gameView;
     private GamePresenter gamePresenter;
+    private SettingsView settingsView;
+    private SettingsPresenter settingsPresenter;
 
     public StartPresenter(AngryTanksModel model, StartView view) {
         this.model = model;
@@ -41,6 +45,18 @@ public class StartPresenter {
                 stage.setScene(new Scene(gameView));
                 gameView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Game Screen");
+                stage.show();
+            }
+        });
+        view.getSettingsButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                settingsView = new SettingsView();
+                settingsPresenter = new SettingsPresenter(model, settingsView, view);
+                Stage stage = (Stage) view.getScene().getWindow();
+                stage.setScene(new Scene(settingsView));
+                stage.sizeToScene();
+                stage.setTitle("Settings Screen");
                 stage.show();
             }
         });

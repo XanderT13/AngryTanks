@@ -4,7 +4,11 @@
     -fx-background-position: center;
 }
 
-
+.settings-view {
+    -fx-background-image: url("/settings.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
 .cool-slider {
     -fx-control-inner-background: black;
     -fx-border-color: darkred;
