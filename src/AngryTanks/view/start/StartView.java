@@ -32,7 +32,7 @@ public class StartView extends GridPane {
     }
     private void layoutNodes() {
         // adding stylesheet
-        this.getStylesheets().add(("/style.css"));
+        this.getStylesheets().add("/style.css");
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(20));
         this.setHgap(10);
