@@ -14,9 +14,15 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class GameView extends BorderPane {
     // private Node attributen (controls)
+    private static final String FILENAME = "resources/terrain_poging1.txt";
     private Label player1Label;
     private Label player2Label;
     private Label windLabel;
@@ -47,7 +53,25 @@ public class GameView extends BorderPane {
 
 
     public void drawTerrain(char[][] terrain) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
+            String line;
+            int row = 0;
 
+            while ((line = br.readLine()) != null && row < 60) {
+                for (int col = 0; col < Math.min(line.length(), 100); col++) {
+                    char ch = line.charAt(col);
+                    Rectangle rect = new Rectangle(10, 10);
+                    if (ch == '#') rect.setFill(Color.DARKGRAY);
+                    if (ch == '.') rect.setFill(Color.DARKGREEN);
+                    if (ch == '-') rect.setFill(Color.LIGHTBLUE);
+                    if (ch == '/') rect.setFill(Color.YELLOW);
+                    gameGrid.add(rect, col, row);
+                }
+                row++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initialiseNodes() {
@@ -60,7 +84,7 @@ public class GameView extends BorderPane {
         windLabel = new Label("Wind");
         velocitySlider = new Slider();
         angleSlider = new Slider();
-        settingsButton = new Button("Settings");
+        settingsButton = new Button();
         fireButton = new Button("FIRE!");
         controlGrid = new GridPane();
         gameGrid = new GridPane();
@@ -81,12 +105,14 @@ public class GameView extends BorderPane {
     }
 
     private void layoutNodes() {
+        // adding stylesheet
+        this.getStylesheets().add("/style.css");
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
-        healthBox1.setSpacing(5);
+        healthBox1.setSpacing(2);
         healthBox2.setAlignment(Pos.CENTER);
-        healthBox2.setSpacing(5);
-        // first we align the Hbox that will be placed in the top of the BorderPane
+        healthBox2.setSpacing(2);
+        // aligning the topBox
         topBox.setAlignment(Pos.CENTER);
         topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
@@ -99,6 +125,7 @@ public class GameView extends BorderPane {
         velocitySlider.setMinorTickCount(0);
         velocitySlider.setBlockIncrement(1);
         velocitySlider.setShowTickLabels(true);
+        velocitySlider.getStyleClass().add("cool-slider");
 
         angleSlider.setOrientation(Orientation.VERTICAL);
         angleSlider.setMin(0);
@@ -106,7 +133,8 @@ public class GameView extends BorderPane {
         angleSlider.setMajorTickUnit(180);
         angleSlider.setMinorTickCount(0);
         angleSlider.setBlockIncrement(1);
-        velocitySlider.setShowTickLabels(true);
+        angleSlider.setShowTickLabels(true);
+        angleSlider.getStyleClass().add("cool-slider");
 
         // aligning and filling the controlGrid
         controlGrid.setGridLinesVisible(true);
@@ -115,8 +143,8 @@ public class GameView extends BorderPane {
         controlGrid.getColumnConstraints().addAll(column1, column2);
         RowConstraints row1 = new RowConstraints(50);
         RowConstraints row2 = new RowConstraints(350);
-        RowConstraints row3 = new RowConstraints(50);
-        RowConstraints row4 = new RowConstraints(50);
+        RowConstraints row3 = new RowConstraints(100);
+        RowConstraints row4 = new RowConstraints(100);
         controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
         controlGrid.add(velocityLabel, 0, 0);
         controlGrid.setHalignment(velocityLabel, HPos.CENTER);
@@ -126,7 +154,53 @@ public class GameView extends BorderPane {
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
+        // spicing up the fireButton
+        fireButton.setPrefSize(80,80);
+        fireButton.setStyle("-fx-background-color: lightcoral;" +
+                "-fx-text-fill: white; " +
+                "-fx-background-radius: 50; " + // Zorgt voor ronde knop
+                "-fx-min-width: 50px; " +
+                "-fx-min-height: 50px; " +
+                "-fx-border-radius: 50; " +
+                "-fx-border-color: darkred; " +
+                "-fx-border-width: 2;");
+        fireButton.setOnMouseEntered(e -> fireButton.setStyle(
+                "-fx-background-color: darkred; " +  // Donkerrood bij hover
+                        "-fx-text-fill: white; " +
+                        "-fx-background-radius: 50; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-border-color: darkred; " +
+                        "-fx-border-width: 2;"
+        ));
+        fireButton.setOnMouseExited(e -> fireButton.setStyle(
+                "-fx-background-color: lightcoral; " +  // Terug naar lichtrood
+                        "-fx-text-fill: white; " +
+                        "-fx-background-radius: 50; " +
+                        "-fx-min-width: 50px; " +
+                        "-fx-min-height: 50px; " +
+                        "-fx-border-radius: 50; " +
+                        "-fx-border-color: darkred; " +
+                        "-fx-border-width: 2;"
+        ));
         controlGrid.add(fireButton, 0,2);
+        controlGrid.setColumnSpan(fireButton, 2);
+        controlGrid.setHalignment(fireButton, HPos.CENTER);
+
+        settingsButton.setPrefSize(75,75);
+        settingsButton.getStyleClass().add("settings-button");
+        settingsButton.setOnMouseEntered(e -> settingsButton.setStyle(
+                        "-fx-border-color: Black; " +
+                        "-fx-border-width: 2;"
+        ));
+        settingsButton.setOnMouseExited(e -> settingsButton.setStyle(
+                        "-fx-border-color: lightgray; " +
+                        "-fx-border-width: 2;"
+        ));
+        controlGrid.add(settingsButton, 0,3);
+        controlGrid.setColumnSpan(settingsButton, 2);
+        controlGrid.setHalignment(settingsButton, HPos.CENTER);
 
 
         // now we fill the BorderPane and align it
@@ -135,6 +209,7 @@ public class GameView extends BorderPane {
         this.setCenter(gameGrid);
         this.setRight(controlGrid);
         this.setBottom(bottomLabel);
+        this.setCenter(gameGrid);
 
 
     }
