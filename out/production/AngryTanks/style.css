@@ -1,16 +1,11 @@
 .start-view {
-    -fx-background-image: url("/startscherm.jpg");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-}
-.left-tank {
-    -fx-background-image: url("/angry-tank-removebg-right.png");
+    -fx-background-image: url("/Angry-Tanks.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
 
+
 .cool-slider {
-    -fx-background-image: transparent;
     -fx-control-inner-background: black;
     -fx-border-color: darkred;
     -fx-border-width: 2;
@@ -34,5 +29,12 @@
     -fx-background-size: 100% 100%; /* Ensures the image fits */
     -fx-background-repeat: no-repeat;
     -fx-border-color: lightgray;
+    -fx-border-width: 2;
+}
+
+.play-button {
+    -fx-background-color: green;
+    -fx-text-fill: black;
+    -fx-border-color: black;
     -fx-border-width: 2;
 }
