@@ -36,7 +36,8 @@ public class Landscape {
 
     public void addTanks(List<Player> players) {
         for (Player player : players) {
-              terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'Z';
+            for (Coordinates c: player.getTank().getTankCoordinates())
+              terrain[c.getY()][c.getX()] = 'Z';
         }
     }
 
