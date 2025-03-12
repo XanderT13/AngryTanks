@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Landscape {
     private char[][] terrain;
-    private static final String FILE_PATH = "/terrain_poging1.txt"; // Bestand in resources zetten
+    private static final String FILE_PATH = "/landscape_120x200.txt"; // Bestand in resources zetten
 
     public Landscape() {
         loadTerrain();

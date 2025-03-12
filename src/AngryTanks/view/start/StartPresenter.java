@@ -33,16 +33,15 @@ public class StartPresenter {
         view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Landscape terrainModel = new Landscape();
-                int width = terrainModel.getTerrain()[0].length;
-                int height = terrainModel.getTerrain().length;
                 // gameview en presenter aanmaken
-                gameView = new GameView(width, height);
+                gameView = new GameView();
                 gamePresenter = new GamePresenter(model, gameView);
                 // huidige stage (scherm) ophalen
                 Stage stage = (Stage) view.getScene().getWindow();
                 // nieuwe scene op de stage zetten
                 stage.setScene(new Scene(gameView));
+                stage.setWidth(1200);
+                stage.setHeight(800);
                 gameView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Game Screen");
                 stage.show();
@@ -55,7 +54,9 @@ public class StartPresenter {
                 settingsPresenter = new SettingsPresenter(model, settingsView, view);
                 Stage stage = (Stage) view.getScene().getWindow();
                 stage.setScene(new Scene(settingsView));
-                stage.sizeToScene();
+                stage.setWidth(1200);
+                stage.setHeight(800);
+                settingsView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Settings Screen");
                 stage.show();
             }
