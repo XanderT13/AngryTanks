@@ -42,3 +42,19 @@
     -fx-border-color: black;
     -fx-border-width: 2;
 }
+
+.tankslider .thumb {
+    -fx-background-image: url("/tank.png");
+    -fx-background-size: cover;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 50px;
+}
+
+.tankslider .track {
+    -fx-pref-height: 50px;
+}
+
+.tankslider .axis {
+    -fx-tick-label-fill: black;
+    -fx-font-weight: bold;
+}
