@@ -15,14 +15,14 @@ public class AngryTanksModel {
         landscape = new Landscape();
         for (int i = 0; i < amount; i++) {
             String playerName = "Player " + (i + 1);
-            players.add(new Player(playerName, new Tank(new Coordinates(1, 1))));
+            players.add(new Player(playerName, new Tank(new Coordinates(1, 34))));
         }
         activePlayer = players.get(0);
         landscape.addTanks(players);
     }
 
     public void nextTurn(double angle, double velocity) {
-        activePlayer.playTurn(wind, angle, velocity);
+        landscape.updateLandscape(activePlayer.playTurn(wind, angle, velocity).getTrajectory());
         wind.generateWind();
         if (checkWinner() != null) {
             return;

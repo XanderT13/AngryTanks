@@ -35,8 +35,23 @@ public class Landscape {
     }
 
     public void addTanks(List<Player> players) {
-       /* for (Player player : players) {
-            terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'X';
-        }*/
+      // for (Player player : players) {
+      //      terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'X';
+      //  }
+    }
+
+    public void updateLandscape(List<Coordinates> trajectory) {
+        for (int i = 0; i < terrain.length; i++) {
+            for (int j = 0; j < terrain[0].length; j++) {
+                if (terrain[i][j] == 'X') {
+                    terrain[i][j] = '-';
+                }
+            }
+        }
+        for (Coordinates c : trajectory) {
+            if (c.getY() >= 0 && c.getY() < terrain.length && terrain[terrain.length - 1 - c.getY()][c.getX()] == '-') {
+                terrain[terrain.length - 1 - c.getY()][c.getX()] = 'X';
+            }
+        }
     }
 }
