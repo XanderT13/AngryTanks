@@ -35,9 +35,9 @@ public class Landscape {
     }
 
     public void addTanks(List<Player> players) {
-      // for (Player player : players) {
-      //      terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'X';
-      //  }
+        for (Player player : players) {
+              terrain[player.getTank().getCoordinaten().getY()][player.getTank().getCoordinaten().getX()] = 'Z';
+        }
     }
 
     public void updateLandscape(List<Coordinates> trajectory) {
@@ -45,12 +45,18 @@ public class Landscape {
             for (int j = 0; j < terrain[0].length; j++) {
                 if (terrain[i][j] == 'X') {
                     terrain[i][j] = '-';
+                } else if (terrain[i][j] == 'Y') {
+                    terrain[i][j] = '/';
                 }
             }
         }
         for (Coordinates c : trajectory) {
-            if (c.getY() >= 0 && c.getY() < terrain.length && terrain[terrain.length - 1 - c.getY()][c.getX()] == '-') {
-                terrain[terrain.length - 1 - c.getY()][c.getX()] = 'X';
+            if (c.getY() >= 0 && c.getY() < terrain.length && (terrain[terrain.length - 1 - c.getY()][c.getX()] == '-' || terrain[terrain.length - 1 - c.getY()][c.getX()] == '/')) {
+                if (terrain[terrain.length - 1 - c.getY()][c.getX()] == '-') {
+                    terrain[terrain.length - 1 - c.getY()][c.getX()] = 'X';
+                } else if (terrain[terrain.length - 1 - c.getY()][c.getX()] == '/') {
+                    terrain[terrain.length - 1 - c.getY()][c.getX()] = 'Y';
+                }
             }
         }
     }
