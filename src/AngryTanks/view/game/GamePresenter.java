@@ -24,7 +24,7 @@ public class GamePresenter {
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                model.nextTurn(view.getAngleSlider().getValue(),view.getVelocitySlider().getValue());
+                model.nextTurn(view.getAngleSlider().getValue(), view.getVelocitySlider().getValue());
                 updateView();
             }
         });
@@ -37,19 +37,19 @@ public class GamePresenter {
     private void updateView() {
         // Vult de view met data uit model
         view.getWindLabel().setText(model.getWind().toString());
-        view.getBottomLabel().setText(model.getActivePlayer().playTurn(model.getWind(), view.getAngleSlider().getValue(),view.getVelocitySlider().getValue()).toString());
+        view.getBottomLabel().setText(model.getActivePlayer().playTurn(model.getWind(), view.getAngleSlider().getValue(), view.getVelocitySlider().getValue()).toString());
         //view.drawTerrain(model.getLandscape().getTerrain());
         for (int col = 0; col < model.getLandscape().getTerrain().length; col++) {
-            for (int row = 0; row < model.getLandscape().getTerrain()[col].length;row++) {
+            for (int row = 0; row < model.getLandscape().getTerrain()[col].length; row++) {
                 char ch = model.getLandscape().getTerrain()[col][row];
                 Rectangle rect = new Rectangle(10, 10);
-                switch(ch){
-                 case '#' -> rect.setFill(Color.DARKGRAY);
-                 case '.' -> rect.setFill(Color.DARKGREEN);
-                 case '-' -> rect.setFill(Color.LIGHTBLUE);
-                 case '/' -> rect.setFill(Color.YELLOW);
-                 case 'X' -> rect.setFill(Color.BLACK);
-                 default -> rect.setFill(Color.WHITE);
+                switch (ch) {
+                    case '#' -> rect.setFill(Color.DARKGRAY);
+                    case '.' -> rect.setFill(Color.DARKGREEN);
+                    case '-' -> rect.setFill(Color.LIGHTBLUE);
+                    case '/' -> rect.setFill(Color.YELLOW);
+                    case 'X', 'Y' -> rect.setFill(Color.BLACK);
+                    default -> rect.setFill(Color.WHITE);
                 }
                 view.getGameGrid().add(rect, row, col);
             }
