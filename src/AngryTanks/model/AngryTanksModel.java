@@ -23,7 +23,14 @@ public class AngryTanksModel {
             }
             for (int j = 1; j < terrain.length; j++) {
                 if (terrain[j][i * x - x2] == '.' && terrain[j - 1][i * x - x2] == '-') {
-                    players.add(new Player(playerName, new Tank(new Coordinates(i * x - x2, j - 1))));
+                    int y;
+                    if (i * x - x2 < terrain.length / 2) {
+                        y = 7;
+                    }
+                    else {
+                        y = -7;
+                    }
+                    players.add(new Player(playerName, new Tank(new Coordinates(i * x - x2 + y, j - 6), i * x - x2 < terrain[0].length / 2)));
                 }
             }
         }
