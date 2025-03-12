@@ -37,13 +37,13 @@ public class SettingsView extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
         this.getStyleClass().add("settings-view");
-        ColumnConstraints column1 = new ColumnConstraints(550);
-        ColumnConstraints column2 = new ColumnConstraints(550);
+        ColumnConstraints column1 = new ColumnConstraints(600);
+        ColumnConstraints column2 = new ColumnConstraints(600);
         this.getColumnConstraints().addAll(column1, column2);
-        RowConstraints row1 = new RowConstraints(190);
-        RowConstraints row2 = new RowConstraints(190);
-        RowConstraints row3 = new RowConstraints(190);
-        RowConstraints row4 = new RowConstraints(90);
+        RowConstraints row1 = new RowConstraints(200);
+        RowConstraints row2 = new RowConstraints(200);
+        RowConstraints row3 = new RowConstraints(200);
+        RowConstraints row4 = new RowConstraints(100);
         this.getRowConstraints().addAll(row1, row2, row3,row4);
 
         backButton.setPrefSize(75, 75);

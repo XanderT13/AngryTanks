@@ -3,10 +3,7 @@ package AngryTanks.view.start;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -18,6 +15,8 @@ public class StartView extends GridPane {
     private Button playButton;
     private ImageView startSchermImage;
     private Button settingsButton;
+    private TextField name1;
+    private TextField name2;
 
     public StartView() {
         this.initialiseNodes();
@@ -29,6 +28,9 @@ public class StartView extends GridPane {
         startSchermImage = new ImageView();
 
         settingsButton = new Button();
+
+        name1 = new TextField();
+        name2 = new TextField();
     }
     private void layoutNodes() {
         // adding stylesheet
@@ -49,21 +51,20 @@ public class StartView extends GridPane {
                 "-fx-border-color: lightgray; " +
                         "-fx-border-width: 2;"
         ));
-        this.add(settingsButton, 2, 5);
+        this.add(settingsButton, 2, 4);
         GridPane.setHalignment(settingsButton, HPos.CENTER);
 
-        this.setGridLinesVisible(false);
-        ColumnConstraints column1 = new ColumnConstraints(200);
+        this.setGridLinesVisible(true);
+        ColumnConstraints column1 = new ColumnConstraints(250);
         ColumnConstraints column2 = new ColumnConstraints(700);
-        ColumnConstraints column3 = new ColumnConstraints(200);
+        ColumnConstraints column3 = new ColumnConstraints(250);
         this.getColumnConstraints().addAll(column1, column2, column3);
-        RowConstraints row1 = new RowConstraints(80);
-        RowConstraints row2 = new RowConstraints(80);
-        RowConstraints row3 = new RowConstraints(80);
-        RowConstraints row4 = new RowConstraints(80);
-        RowConstraints row5 = new RowConstraints(140);
-        RowConstraints row6 = new RowConstraints(80);
-        this.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6);
+        RowConstraints row1 = new RowConstraints(160);
+        RowConstraints row2 = new RowConstraints(160);
+        RowConstraints row3 = new RowConstraints(160);
+        RowConstraints row4 = new RowConstraints(160);
+        RowConstraints row5 = new RowConstraints(160);
+        this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
 
 
         playButton.getStyleClass().add("play-button");
@@ -77,7 +78,7 @@ public class StartView extends GridPane {
                         "-fx-border-color: black; " +
                         "-fx-border-width: 2;"
         ));
-        this.add(playButton, 1, 5);
+        this.add(playButton, 1, 4);
         playButton.setPrefSize(120,40);
         GridPane.setHalignment(playButton, HPos.CENTER);
 
@@ -85,17 +86,29 @@ public class StartView extends GridPane {
         GridPane.setRowSpan(startSchermImage, 5);
         this.add(startSchermImage, 0, 0);
 
+        name1.setMaxWidth(250);
+        this.add(name1, 1, 2);
+        this.setHalignment(name1, HPos.LEFT);
+        name2.setMaxWidth(250);
+        this.add(name2, 1, 2);
+        this.setHalignment(name2, HPos.RIGHT);
+
 
     }
 
     // implementatie van de nodige
     // package-private Getters
     Button getPlayButton() {
-
         return playButton;
     }
     Button getSettingsButton() {
         return settingsButton;
+    }
+    TextField getName1() {
+        return name1;
+    }
+    TextField getName2() {
+        return name2;
     }
 
 }

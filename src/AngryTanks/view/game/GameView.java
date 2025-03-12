@@ -1,5 +1,8 @@
 package AngryTanks.view.game;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -22,7 +25,7 @@ import java.io.IOException;
 
 public class GameView extends BorderPane {
     // private Node attributen (controls)
-    private static final String FILENAME = "resources/terrain_poging1.txt";
+    private static final String FILENAME = "resources/landscape_120x200.txt";
     private Label player1Label;
     private Label player2Label;
     private Label windLabel;
@@ -44,11 +47,12 @@ public class GameView extends BorderPane {
     private GridPane controlGrid;
     private GridPane gameGrid;
     private Label bottomLabel;
+    private Label velSliderLabel;
+    private Label angleSliderLabel;
 
-    public GameView(int width, int height) {
+    public GameView() {
         initialiseNodes();
         layoutNodes();
-
     }
 
 
@@ -57,13 +61,13 @@ public class GameView extends BorderPane {
             String line;
             int row = 0;
 
-            while ((line = br.readLine()) != null && row < 60) {
-                for (int col = 0; col < Math.min(line.length(), 100); col++) {
+            while ((line = br.readLine()) != null && row < 120) {
+                for (int col = 0; col < Math.min(line.length(), 200); col++) {
                     char ch = line.charAt(col);
-                    Rectangle rect = new Rectangle(10, 10);
-                    if (ch == '#') rect.setFill(Color.DARKGRAY);
+                    Rectangle rect = new Rectangle(5, 5);
+                    if (ch == '-') rect.setFill(Color.DARKGRAY);
                     if (ch == '.') rect.setFill(Color.DARKGREEN);
-                    if (ch == '-') rect.setFill(Color.LIGHTBLUE);
+                    if (ch == '#') rect.setFill(Color.LIGHTBLUE);
                     if (ch == '/') rect.setFill(Color.YELLOW);
                     if (ch == 'X') rect.setFill(Color.BLACK);
                     gameGrid.add(rect, col, row);
@@ -102,6 +106,43 @@ public class GameView extends BorderPane {
         healthBox2 = new HBox(life4, life5, life6);
         topBox = new HBox(player1Label, healthBox1, windLabel, player2Label, healthBox2);
 
+        velSliderLabel = new Label(String.format("%.0f", velocitySlider.getValue()));
+        velSliderLabel.textProperty().bind(Bindings.format("%.0f", velocitySlider.valueProperty()));
+        velocitySlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double thumbY = ((velocitySlider.getMax() - newVal.doubleValue()) /
+                    (velocitySlider.getMax() - velocitySlider.getMin()))
+                    * velocitySlider.getHeight();
+
+            velSliderLabel.setTranslateY(thumbY - 175); // Adjust positioning
+            velSliderLabel.setTranslateX(10);
+        });
+        // Ensure correct starting position
+        Platform.runLater(() -> {
+            double initialY = ((velocitySlider.getMax() - velocitySlider.getValue()) /
+                    (velocitySlider.getMax() - velocitySlider.getMin()))
+                    * velocitySlider.getHeight();
+            velSliderLabel.setTranslateY(initialY - 175);
+            velSliderLabel.setTranslateX(10);
+        });
+
+        angleSliderLabel = new Label(String.format("%.0f", angleSlider.getValue()));
+        angleSliderLabel.textProperty().bind(Bindings.format("%.0f", angleSlider.valueProperty()));
+        angleSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            double thumbY = ((angleSlider.getMax() - newVal.doubleValue()) /
+                    (angleSlider.getMax() - angleSlider.getMin()))
+                    * angleSlider.getHeight();
+
+            angleSliderLabel.setTranslateY(thumbY -175); // Adjust positioning
+            angleSliderLabel.setTranslateX(10);
+        });
+        // Ensure correct starting position
+        Platform.runLater(() -> {
+            double initialY = ((angleSlider.getMax() - angleSlider.getValue()) /
+                    (angleSlider.getMax() - angleSlider.getMin()))
+                    * angleSlider.getHeight();
+            angleSliderLabel.setTranslateY(initialY - 175);
+            angleSliderLabel.setTranslateX(10);
+        });
 
     }
 
@@ -152,8 +193,10 @@ public class GameView extends BorderPane {
         controlGrid.add(angleLabel, 1, 0);
         controlGrid.setHalignment(angleLabel, HPos.CENTER);
         controlGrid.add(velocitySlider, 0, 1);
+        controlGrid.add(velSliderLabel, 0, 1);
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
         controlGrid.add(angleSlider, 1, 1);
+        controlGrid.add(angleSliderLabel, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
         // spicing up the fireButton
         fireButton.setPrefSize(80,80);
