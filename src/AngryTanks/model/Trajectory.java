@@ -14,11 +14,11 @@ public class Trajectory {
             case RIGHT -> wind.getPower();
         };
         if (shot.getAngle() < Math.PI / 2) {
-            for (int x = 0; x < 100 - tank.getCoordinaten().getX(); x++) {
+            for (int x = 0; x < 200 - tank.getCoordinaten().getX(); x++) {
                 double deel1, deel2, deel3;
                 deel1 = -(9.81 / 2) / Math.pow(shot.getVelocity() * Math.cos(shot.getAngle()) - windPower, 2);
                 deel2 = Math.sin(shot.getAngle()) / (Math.cos(shot.getAngle()) - (windPower / shot.getVelocity()));
-                deel3 = tank.getCoordinaten().getY();
+                deel3 = 119 - tank.getCoordinaten().getY();
                 y = deel1 * Math.pow(x, 2) + deel2 * x + deel3;
                 trajectory.add(new Coordinates(x + tank.getCoordinaten().getX(), (int) Math.round(y)));
             }
@@ -27,7 +27,7 @@ public class Trajectory {
                 double deel1, deel2, deel3;
                 deel1 = -(9.81 / 2) / Math.pow(shot.getVelocity() * Math.cos(shot.getAngle()) - windPower, 2);
                 deel2 = Math.sin(shot.getAngle()) / (Math.cos(shot.getAngle()) - (windPower / shot.getVelocity()));
-                deel3 = 99 - tank.getCoordinaten().getY();
+                deel3 = 119 - tank.getCoordinaten().getY();
                 y = deel1 * Math.pow(x, 2) + deel2 * x + deel3;
                 trajectory.add(new Coordinates((tank.getCoordinaten().getX()) + x, (int) Math.round(y)));
             }
