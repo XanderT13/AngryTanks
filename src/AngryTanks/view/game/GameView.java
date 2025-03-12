@@ -65,6 +65,7 @@ public class GameView extends BorderPane {
                     if (ch == '.') rect.setFill(Color.DARKGREEN);
                     if (ch == '-') rect.setFill(Color.LIGHTBLUE);
                     if (ch == '/') rect.setFill(Color.YELLOW);
+                    if (ch == 'X') rect.setFill(Color.BLACK);
                     gameGrid.add(rect, col, row);
                 }
                 row++;
@@ -279,4 +280,25 @@ public class GameView extends BorderPane {
     Label getBottomLabel() {
         return bottomLabel;
     }
+
+    HBox getTopBox() {
+        return topBox;
+    }
+
+    HBox getHealthBox1() {
+        return healthBox1;
+    }
+
+    HBox getHealthBox2() {
+        return healthBox2;
+    }
+
+    GridPane getControlGrid() {
+        return controlGrid;
+    }
+
+    GridPane getGameGrid() {
+        return gameGrid;
+    }
 }
+
