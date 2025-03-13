@@ -22,7 +22,7 @@ public class AngryTanksModel {
                 x2 = 1;
             }
             for (int j = 1; j < terrain.length; j++) {
-                if (terrain[j][i * x - x2] == '.' && terrain[j - 1][i * x - x2] == '-') {
+                if (terrain[j][i * x - x2] == '.' && terrain[j - 1][i * x - x2] == '#') {
                     int y;
                     if (i * x - x2 < terrain.length / 2) {
                         y = 7;

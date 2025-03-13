@@ -4,9 +4,12 @@ import AngryTanks.model.AngryTanksModel;
 import AngryTanks.model.Landscape;
 import AngryTanks.view.start.StartView;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.WindowEvent;
 
 public class GamePresenter {
     private AngryTanksModel model;
@@ -48,7 +51,8 @@ public class GamePresenter {
                  case '.' -> rect.setFill(Color.DARKGREEN);
                  case '#' -> rect.setFill(Color.LIGHTBLUE);
                  case '/' -> rect.setFill(Color.YELLOW);
-                 case 'X' -> rect.setFill(Color.BLACK);
+                 case 'X','Y' -> rect.setFill(Color.BLACK);
+                 case 'Z' -> rect.setFill(Color.RED);
                  default -> rect.setFill(Color.WHITE);
                 }
                 view.getGameGrid().add(rect, row, col);
@@ -59,5 +63,22 @@ public class GamePresenter {
     public void addWindowEventHandlers() {
         // Window event handlers (anon. inner klassen)
         // Koppeling via view.getScene().getWindow()
+        view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Hierdoor stopt het spel!");
+                alert.setTitle("Opgelet!");
+                alert.setContentText("Ben je zeker?");
+                alert.getButtonTypes().clear();
+                ButtonType nee = new ButtonType("Nee");
+                ButtonType ja =  new ButtonType("Ja");
+                alert.getButtonTypes().addAll(nee, ja);
+                alert.showAndWait();
+                if (alert.getResult() == null || alert.getResult().equals(nee)){
+                    event.consume();
+                }
+            }
+        });
     }
 }

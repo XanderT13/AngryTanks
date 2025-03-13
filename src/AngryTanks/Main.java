@@ -10,13 +10,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) {
-        AngryTanksModel model =
-                new AngryTanksModel(2);
-        StartView view =
-                new StartView();
-        StartPresenter presenter =
-                new StartPresenter(model, view);
+    public void start(Stage primaryStage) throws Exception {
+        AngryTanksModel model = new AngryTanksModel(2);
+        StartView view = new StartView();
+        StartPresenter presenter = new StartPresenter(model, view);
         primaryStage.setTitle("Angry Tanks Start Screen");
         primaryStage.setWidth(1200);
         primaryStage.setHeight(800);
