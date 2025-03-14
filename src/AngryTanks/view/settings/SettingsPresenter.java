@@ -34,8 +34,8 @@ public class SettingsPresenter {
                 StartPresenter startPresenter = new StartPresenter(model, newStartview);
                Stage stage = (Stage) view.getScene().getWindow();
                stage.setScene(new Scene(newStartview));
-               stage.setWidth(1300);
-               stage.setHeight(800);
+               newStartview.setPrefSize(1300,800);
+               stage.sizeToScene();
                stage.setTitle("Start Screen");
                stage.show();
              }

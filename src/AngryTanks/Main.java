@@ -13,11 +13,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         AngryTanksModel model = new AngryTanksModel();
         StartView view = new StartView();
+        view.setPrefSize(1300,800);
         StartPresenter presenter = new StartPresenter(model, view);
         primaryStage.setTitle("Angry Tanks Start Screen");
-        primaryStage.setWidth(1200);
-        primaryStage.setHeight(800);
         primaryStage.setScene(new Scene(view));
+        primaryStage.sizeToScene();
         presenter.addWindowEventHandlers();
         primaryStage.show();
     }

@@ -1,5 +1,8 @@
 package AngryTanks.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +14,25 @@ public class AngryTanksModel {
     private Landscape landscape;
     private Player activePlayer;
     private List<String> playerNames;
+    private DoubleProperty volume = new SimpleDoubleProperty(0.5);
 
     public AngryTanksModel() {
         players = new ArrayList<>();
         wind = new Wind();
         landscape = new Landscape();
         playerNames = new ArrayList<>();
+    }
+
+    public DoubleProperty volumeProperty() {
+        return volume;
+    }
+
+    public double getVolume() {
+        return volume.get();
+    }
+
+    public void setVolume(double volume) {
+        this.volume.set(volume);
     }
 
     public void addPlayers() {
