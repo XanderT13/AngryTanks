@@ -52,10 +52,16 @@ public class AngryTanksModel {
             tr = activePlayer.playTurn(wind, angle, velocity);
         }
         tr.setImpactType(landscape.updateLandscape(tr, activePlayer));
-        if (tr.getImpactType() == HIT || tr.getImpactType() == BLAST) {
+        if (tr.getImpactType() == HIT) {
             for (Player player : players) {
                 if (player != activePlayer) {
-                    player.getTank().setDead(true);
+                    player.getTank().setLives(player.getTank().getLives() - 2);
+                }
+            }
+        } else if (tr.getImpactType() == BLAST) {
+            for (Player player : players) {
+                if (player != activePlayer) {
+                    player.getTank().setLives(player.getTank().getLives() - 1);
                 }
             }
         }
@@ -92,7 +98,7 @@ public class AngryTanksModel {
         Player player = null;
         int alive = 0;
         for (Player p : players) {
-            if (!p.getTank().isDead()) {
+            if (p.getTank().getLives() < 1) {
                 player = p;
                 alive++;
             }
