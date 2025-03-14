@@ -69,9 +69,9 @@ public class GamePresenter {
                  case '-' -> rect.setFill(Color.DARKGRAY);
                  case '.' -> rect.setFill(Color.DARKGREEN);
                  case '#' -> rect.setFill(Color.LIGHTBLUE);
-                 case '/' -> rect.setFill(Color.YELLOW);
+                 case '/', 'Z' -> rect.setFill(Color.YELLOW);
                  case 'X','Y' -> rect.setFill(Color.BLACK);
-                 case 'Z' -> rect.setFill(Color.RED);
+                 case 'A' -> rect.setFill(Color.RED);
                  default -> rect.setFill(Color.WHITE);
                 }
                 view.getGameGrid().add(rect, row, col);
