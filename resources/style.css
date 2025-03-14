@@ -9,6 +9,12 @@
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.end-view {
+    -f-background-image :url("/endscreen.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
 .cool-slider {
     -fx-control-inner-background: black;
     -fx-border-color: darkred;
