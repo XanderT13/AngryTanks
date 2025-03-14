@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import static AngryTanks.model.ImpactType.*;
-
 public class Landscape {
     private char[][] terrain;
     private static final String FILE_PATH = "/landscape_120x200.txt"; // Bestand in resources zetten
@@ -38,12 +36,12 @@ public class Landscape {
 
     public void addTanks(List<Player> players) {
         for (Player player : players) {
-            for (Coordinates c : player.getTank().getTankCoordinates())
-                terrain[c.getY()][c.getX()] = 'A';
+            for (Coordinates c: player.getTank().getTankCoordinates())
+              terrain[c.getY()][c.getX()] = 'Z';
         }
     }
 
-    public ImpactType updateLandscape(Trajectory trajectory, Player activePlayer) {
+    public void updateLandscape(List<Coordinates> trajectory) {
         for (int i = 0; i < terrain.length; i++) {
             for (int j = 0; j < terrain[0].length; j++) {
                 if (terrain[i][j] == 'X') {
@@ -51,55 +49,16 @@ public class Landscape {
                 } else if (terrain[i][j] == 'Y') {
                     terrain[i][j] = '/';
                 }
-                else if (terrain[i][j] == 'Z') {
-                    terrain[i][j] = 'A';
-                }
             }
         }
-        for (Coordinates cPlayer : activePlayer.getTank().getTankCoordinates()) {
-            terrain[cPlayer.getY()][cPlayer.getX()] = 'Z';
-        }
-        for (Coordinates c : trajectory.getTrajectory()) {
-            int y = terrain.length - 1 - c.getY();
-            int x = c.getX();
+        for (Coordinates c : trajectory) {
             if (c.getY() >= 0 && c.getY() < terrain.length) {
-                if (terrain[y][x] == '#') {
-                    terrain[y][x] = 'X';
-                } else if (terrain[y][x] == '/') {
-                    terrain[y][x] = 'Y';
-                } else if (terrain[y][x] == '.') {
-                    terrain[y][x] = 'X';
-                    trajectory.setImpactRadius(new Coordinates(x, y), true);
-                    for (Coordinates impactC : trajectory.getImpactRadius()) {
-                        int impactX = impactC.getX();
-                        int impactY = impactC.getY();
-                        if (terrain[impactY][impactX] == '-' || terrain[impactY][impactX] == '.') {
-                            terrain[impactY][impactX] = '#';
-                        }
-                        if (terrain[impactY][impactX] == 'A') {
-                            return BLAST;
-                        }
-                    }
-                    return LAND;
-                } else if (terrain[y][x] == '-') {
-                    terrain[y][x] = 'X';
-                    trajectory.setImpactRadius(new Coordinates(x, y), false);
-                    for (Coordinates impactC : trajectory.getImpactRadius()) {
-                        int impactX = impactC.getX();
-                        int impactY = impactC.getY();
-                        if (terrain[impactY][impactX] == '-' || terrain[impactY][impactX] == '.') {
-                            terrain[impactY][impactX] = '#';
-                        }
-                        if (terrain[impactY][impactX] == 'A') {
-                            return BLAST;
-                        }
-                    }
-                    return LAND;
-                } else if (terrain[y][x] == 'A') {
-                    return HIT;
+                if (terrain[terrain.length - 1 - c.getY()][c.getX()] == '#') {
+                    terrain[terrain.length - 1 - c.getY()][c.getX()] = 'X';
+                } else if (terrain[terrain.length - 1 - c.getY()][c.getX()] == '/') {
+                    terrain[terrain.length - 1 - c.getY()][c.getX()] = 'Y';
                 }
             }
         }
-        return MISS;
     }
 }

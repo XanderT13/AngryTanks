@@ -9,7 +9,10 @@ import AngryTanks.view.settings.SettingsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class StartPresenter {
     private AngryTanksModel model;
@@ -61,6 +64,7 @@ public class StartPresenter {
                 stage.show();
             }
         });
+
     }
     private void updateView() {
         // Vult de view met data uit model
@@ -68,5 +72,22 @@ public class StartPresenter {
     public void addWindowEventHandlers () {
         // Window event handlers (anon. inner klassen)
         // Koppeling via view.getScene().getWindow()
+        view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText("Hierdoor stopt het spel!");
+                alert.setTitle("Opgelet!");
+                alert.setContentText("Ben je zeker?");
+                alert.getButtonTypes().clear();
+                ButtonType nee = new ButtonType("Nee");
+                ButtonType ja =  new ButtonType("Ja");
+                alert.getButtonTypes().addAll(nee, ja);
+                alert.showAndWait();
+                if (alert.getResult() == null || alert.getResult().equals(nee)){
+                    event.consume();
+                }
+            }
+        });
     }
 }
