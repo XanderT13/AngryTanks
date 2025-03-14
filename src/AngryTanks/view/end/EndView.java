@@ -28,4 +28,8 @@ public class EndView extends BorderPane {
     }
     // implementatie van de nodige
     // package-private Getters
+
+    public Label getWinnaarLabel() {
+        return winnaarLabel;
+    }
 }
