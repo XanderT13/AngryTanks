@@ -41,6 +41,7 @@ public class GamePresenter {
         this.view = view;
         this.addEventHandlers();
         this.updateView();
+        this.fireSoundVolume = model.getVolume();
     }
 
     private void addEventHandlers() {
@@ -74,8 +75,8 @@ public class GamePresenter {
                     Stage stage = new Stage();
                     // nieuwe scene op de stage zetten
                     stage.setScene(new Scene(endView));
-                    stage.setWidth(1300);
-                    stage.setHeight(800);
+                    endView.setPrefSize(1300, 800);
+                    stage.sizeToScene();
                     stage.setTitle("End Screen");
                     Timeline timeline = new Timeline(
                             new KeyFrame(Duration.seconds(5), e -> {
@@ -95,8 +96,8 @@ public class GamePresenter {
                 settingsPresenter = new Settings2Presenter(model, settingsView, view, GamePresenter.this);
                 Stage stage = (Stage) view.getScene().getWindow();
                 stage.setScene(new Scene(settingsView));
-                stage.setWidth(1300);
-                stage.setHeight(800);
+                settingsView.setPrefSize(1300, 800);
+                stage.sizeToScene();
                 stage.setTitle("Settings Screen");
                 stage.show();
             }

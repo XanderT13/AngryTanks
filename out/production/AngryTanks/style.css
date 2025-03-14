@@ -10,6 +10,11 @@
     -fx-background-position: center;
 }
 
+.settings2-view {
+    -fx-background-image: url("/settings2.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
 .end-view {
     -fx-background-image :url("/endscreen.png");
     -fx-background-size: cover;

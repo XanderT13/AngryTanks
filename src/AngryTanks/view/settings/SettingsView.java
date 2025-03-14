@@ -33,8 +33,7 @@ public class SettingsView extends GridPane {
     private void layoutNodes() {
         this.getStylesheets().add("/style.css");
         this.setAlignment(Pos.CENTER);
-        this.setHgap(10);
-        this.setVgap(10);
+
         this.setGridLinesVisible(false);
         this.getStyleClass().add("settings-view");
         ColumnConstraints column1 = new ColumnConstraints(600);

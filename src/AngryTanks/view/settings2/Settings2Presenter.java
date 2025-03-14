@@ -35,6 +35,7 @@ public class Settings2Presenter {
             public void handle(MouseEvent event) {
                 // Haal de waarde van de slider op en pas het volume aan
                 double newVolume = view.getVolumeSlider().getValue();
+                model.setVolume(newVolume);
                 gamePresenter.setFireSoundVolume(newVolume);
             }
         });
@@ -45,8 +46,9 @@ public class Settings2Presenter {
                 GamePresenter gamePresenter1 = new GamePresenter(model, newGameView);
                 Stage stage = (Stage) view.getScene().getWindow();
                 stage.setScene(new Scene(newGameView));
-                stage.setWidth(1300);
-                stage.setHeight(800);
+                newGameView.setPrefSize(1300,800);
+                stage.sizeToScene();
+                stage.setResizable(true);
                 stage.setTitle("Start Screen");
                 stage.show();
             }
@@ -54,6 +56,7 @@ public class Settings2Presenter {
     }
 
     private void updateView() {
+        view.getVolumeSlider().setValue(model.getVolume());
 
     }
 
