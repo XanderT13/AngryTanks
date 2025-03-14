@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import static AngryTanks.model.ImpactType.*;
+import static AngryTanks.model.ImpactType.MISS;
 
 public class Landscape {
     private char[][] terrain;
@@ -38,12 +39,12 @@ public class Landscape {
 
     public void addTanks(List<Player> players) {
         for (Player player : players) {
-            for (Coordinates c : player.getTank().getTankCoordinates())
-                terrain[c.getY()][c.getX()] = 'A';
+            for (Coordinates c: player.getTank().getTankCoordinates())
+              terrain[c.getY()][c.getX()] = 'A';
         }
     }
 
-    public ImpactType updateLandscape(Trajectory trajectory, Player activePlayer) {
+    public void updateLandscape(List<Coordinates> trajectory) {
         for (int i = 0; i < terrain.length; i++) {
             for (int j = 0; j < terrain[0].length; j++) {
                 if (terrain[i][j] == 'X') {
