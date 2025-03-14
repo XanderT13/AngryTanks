@@ -43,9 +43,8 @@ public class StartPresenter {
                 Stage stage = (Stage) view.getScene().getWindow();
                 // nieuwe scene op de stage zetten
                 stage.setScene(new Scene(gameView));
-                stage.setWidth(1200);
+                stage.setWidth(1300);
                 stage.setHeight(800);
-                gameView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Game Screen");
                 stage.show();
             }
@@ -57,7 +56,7 @@ public class StartPresenter {
                 settingsPresenter = new SettingsPresenter(model, settingsView, view);
                 Stage stage = (Stage) view.getScene().getWindow();
                 stage.setScene(new Scene(settingsView));
-                stage.setWidth(1200);
+                stage.setWidth(1300);
                 stage.setHeight(800);
                 settingsView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Settings Screen");
