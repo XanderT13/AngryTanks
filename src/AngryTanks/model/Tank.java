@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tank {
-    private boolean isDead;
+    private int lives;
     private Coordinates gunCoordinates;
     private List<Coordinates> tankCoordinates;
     private boolean facingRight;
@@ -67,11 +67,15 @@ public class Tank {
             tankCoordinates.add(new Coordinates(gunX + 6, gunY + 5));
             tankCoordinates.add(new Coordinates(gunX + 7, gunY + 4));
         }
-        isDead = false;
+        lives = 3;
     }
 
-    public boolean isDead() {
-        return isDead;
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public Coordinates getCoordinaten() {
@@ -80,10 +84,6 @@ public class Tank {
 
     public List<Coordinates> getTankCoordinates() {
         return tankCoordinates;
-    }
-
-    public void setDead(boolean dead) {
-        isDead = dead;
     }
 
     public boolean isFacingRight() {

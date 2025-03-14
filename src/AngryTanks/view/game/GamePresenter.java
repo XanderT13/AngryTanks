@@ -2,6 +2,7 @@ package AngryTanks.view.game;
 
 import AngryTanks.model.AngryTanksModel;
 import AngryTanks.model.Landscape;
+import AngryTanks.model.Player;
 import AngryTanks.view.end.EndPresenter;
 import AngryTanks.view.end.EndView;
 import AngryTanks.view.start.StartView;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -36,6 +38,8 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
+        view.getPlayer1Label().setText(model.getPlayerNames().get(0));
+        view.getPlayer2Label().setText(model.getPlayerNames().get(1));
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -46,6 +50,16 @@ public class GamePresenter {
                 fireSoundPlayer.setVolume(1.0);
                 fireSoundPlayer.play();
                 boolean endGame = model.nextTurn(view.getAngleSlider().getValue(), view.getVelocitySlider().getValue());
+                Player player1 = model.getPlayers().get(0);
+                Player player2 = model.getPlayers().get(1);
+                view.getHealthBox1().getChildren().removeAll(view.getHealthBox1().getChildren());
+                view.getHealthBox2().getChildren().removeAll(view.getHealthBox2().getChildren());
+                for (int i = 0; i < player1.getTank().getLives(); i++) {
+                    view.getHealthBox1().getChildren().add(new Circle(15, Color.GREEN));
+                }
+                for (int i = 0; i < player2.getTank().getLives(); i++) {
+                    view.getHealthBox2().getChildren().add(new Circle(15, Color.GREEN));
+                }
                 updateView();
                 if (endGame) {
                     endView = new EndView();
