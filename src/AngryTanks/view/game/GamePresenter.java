@@ -73,7 +73,6 @@ public class GamePresenter {
     private void updateView() {
         // Vult de view met data uit model
         view.getWindLabel().setText(model.getWind().toString());
-        //view.drawTerrain(model.getLandscape().getTerrain());
         for (int col = 0; col < model.getLandscape().getTerrain().length; col++) {
             for (int row = 0; row < model.getLandscape().getTerrain()[col].length; row++) {
                 char ch = model.getLandscape().getTerrain()[col][row];

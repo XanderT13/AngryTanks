@@ -27,7 +27,6 @@ public class EndView extends BorderPane {
     private void layoutNodes() {
         this.getStylesheets().add("/style.css");
         this.getStyleClass().add("end-view");
-
         this.setCenter(winnaarLabel);
     }
     // implementatie van de nodige
