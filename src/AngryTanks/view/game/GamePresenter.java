@@ -30,30 +30,17 @@ public class GamePresenter {
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                playFireSound();
+                // geluid laden en afspelen met playFireSound()
+                String soundPath = getClass().getResource("/tank_firing.mp3").toExternalForm();
+                Media fireSound = new Media(soundPath);
+                fireSoundPlayer = new MediaPlayer(fireSound);
+                fireSoundPlayer.setVolume(1.0);
+                fireSoundPlayer.play();
+
                 model.nextTurn(view.getAngleSlider().getValue(),view.getVelocitySlider().getValue());
                 updateView();
             }
         });
-    }
-
-    private void loadFireSound() {
-        try {
-            // Laad het geluidsbestand vanuit de resources map
-            String soundPath = getClass().getResource("/tank_firing.mp3").toExternalForm();
-            Media fireSound = new Media(soundPath);
-            fireSoundPlayer = new MediaPlayer(fireSound);
-            fireSoundPlayer.setVolume(1.0);
-        } catch (Exception e) {
-            System.err.println("Kon het geluidsbestand niet laden: " + e.getMessage());
-        }
-    }
-
-    private void playFireSound() {
-        if (fireSoundPlayer != null) {
-            fireSoundPlayer.stop(); // Stop het geluid als het al speelt
-            fireSoundPlayer.play(); // Speel het geluid af
-        }
     }
 
     private void updateView() {
