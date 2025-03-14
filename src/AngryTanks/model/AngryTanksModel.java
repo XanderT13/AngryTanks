@@ -3,6 +3,8 @@ package AngryTanks.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static AngryTanks.model.ImpactType.*;
+
 public class AngryTanksModel {
     private List<Player> players;
     private Wind wind;
@@ -22,12 +24,11 @@ public class AngryTanksModel {
                 x2 = 1;
             }
             for (int j = 1; j < terrain.length; j++) {
-                if (terrain[j][i * x - x2] == '.' && terrain[j - 1][i * x - x2] == '-') {
+                if (terrain[j][i * x - x2] == '.' && terrain[j - 1][i * x - x2] == '#') {
                     int y;
                     if (i * x - x2 < terrain.length / 2) {
                         y = 7;
-                    }
-                    else {
+                    } else {
                         y = -7;
                     }
                     players.add(new Player(playerName, new Tank(new Coordinates(i * x - x2 + y, j - 6), i * x - x2 < terrain[0].length / 2)));
@@ -39,10 +40,23 @@ public class AngryTanksModel {
     }
 
     public void nextTurn(double angle, double velocity) {
-        List<Coordinates> tr = activePlayer.playTurn(wind, angle, velocity).getTrajectory();
-        landscape.updateLandscape(tr);
+        Trajectory tr;
+        if (!activePlayer.getTank().isFacingRight()) {
+            tr = activePlayer.playTurn(wind, 180 - angle, velocity);
+        } else {
+            tr = activePlayer.playTurn(wind, angle, velocity);
+        }
+        tr.setImpactType(landscape.updateLandscape(tr, activePlayer));
+        if (tr.getImpactType() == HIT || tr.getImpactType() == BLAST) {
+            for (Player player : players) {
+                if (player != activePlayer) {
+                    player.getTank().setDead(true);
+                }
+            }
+        }
         wind.generateWind();
         if (checkWinner() != null) {
+            System.out.println("Gedaan!");
             return;
         }
         for (Player player : players) {
@@ -70,7 +84,7 @@ public class AngryTanksModel {
     }
 
     public Player checkWinner() {
-       /*Player player = null;
+        Player player = null;
         int alive = 0;
         for (Player p : players) {
             if (!p.getTank().isDead()) {
@@ -81,7 +95,6 @@ public class AngryTanksModel {
         if (alive > 1) {
             player = null;
         }
-        return player;*/
-        return null;
+        return player;
     }
 }
