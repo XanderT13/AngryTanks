@@ -15,6 +15,7 @@ public class EndPresenter {
         this.updateView();
     }
     private void addEventHandlers() {
+        view.getWinnaarLabel().setText(model.getActivePlayer().getName() + "has won!");
         // Koppelt event handlers (anon. inner klassen)
         // aan de controls uit de view.
         // Event handlers: roepen methodes aan uit het

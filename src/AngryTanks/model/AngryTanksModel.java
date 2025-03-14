@@ -39,7 +39,7 @@ public class AngryTanksModel {
         landscape.addTanks(players);
     }
 
-    public void nextTurn(double angle, double velocity) {
+    public boolean nextTurn(double angle, double velocity) {
         Trajectory tr;
         if (!activePlayer.getTank().isFacingRight()) {
             tr = activePlayer.playTurn(wind, 180 - angle, velocity);
@@ -56,15 +56,15 @@ public class AngryTanksModel {
         }
         wind.generateWind();
         if (checkWinner() != null) {
-            System.out.println("Gedaan!");
-            return;
+            return true;
         }
         for (Player player : players) {
             if (activePlayer != player) {
                 activePlayer = player;
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     public List<Player> getPlayers() {

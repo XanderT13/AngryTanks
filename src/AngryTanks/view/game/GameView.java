@@ -46,7 +46,6 @@ public class GameView extends BorderPane {
     private Circle life6;
     private GridPane controlGrid;
     private GridPane gameGrid;
-    private Label bottomLabel;
     private Label velSliderLabel;
     private Label angleSliderLabel;
 
@@ -95,7 +94,6 @@ public class GameView extends BorderPane {
         gameGrid = new GridPane();
         velocityLabel = new Label("Velocity");
         angleLabel = new Label("Angle");
-        bottomLabel = new Label("TRAJECTORY");
         life1 = new Circle(15, Color.GREEN);
         life2 = new Circle(15, Color.GREEN);
         life3 = new Circle(15, Color.GREEN);
@@ -252,7 +250,6 @@ public class GameView extends BorderPane {
         this.setTop(topBox);
         this.setCenter(gameGrid);
         this.setRight(controlGrid);
-        this.setBottom(bottomLabel);
         this.setCenter(gameGrid);
 
 
@@ -318,10 +315,6 @@ public class GameView extends BorderPane {
 
     Circle getLife6() {
         return life6;
-    }
-
-    Label getBottomLabel() {
-        return bottomLabel;
     }
 
     HBox getTopBox() {
