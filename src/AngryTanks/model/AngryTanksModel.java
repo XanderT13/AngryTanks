@@ -10,15 +10,20 @@ public class AngryTanksModel {
     private Wind wind;
     private Landscape landscape;
     private Player activePlayer;
+    private List<String> playerNames;
 
-    public AngryTanksModel(int amount) {
-        players = new ArrayList<Player>();
+    public AngryTanksModel() {
+        players = new ArrayList<>();
         wind = new Wind();
         landscape = new Landscape();
-        for (int i = 0; i < amount; i++) {
-            String playerName = "Player " + (i + 1);
+        playerNames = new ArrayList<>();
+    }
+
+    public void addPlayers() {
+        for (int i = 0; i < playerNames.size(); i++) {
+            String playerName = playerNames.get(i);
             char[][] terrain = landscape.getTerrain();
-            int x = terrain[0].length / (amount - 1);
+            int x = terrain[0].length / (playerNames.size() - 1);
             int x2 = 0;
             if (i != 0) {
                 x2 = 1;
@@ -47,10 +52,16 @@ public class AngryTanksModel {
             tr = activePlayer.playTurn(wind, angle, velocity);
         }
         tr.setImpactType(landscape.updateLandscape(tr, activePlayer));
-        if (tr.getImpactType() == HIT || tr.getImpactType() == BLAST) {
+        if (tr.getImpactType() == HIT) {
             for (Player player : players) {
                 if (player != activePlayer) {
-                    player.getTank().setDead(true);
+                    player.getTank().setLives(player.getTank().getLives() - 2);
+                }
+            }
+        } else if (tr.getImpactType() == BLAST) {
+            for (Player player : players) {
+                if (player != activePlayer) {
+                    player.getTank().setLives(player.getTank().getLives() - 1);
                 }
             }
         }
@@ -87,7 +98,7 @@ public class AngryTanksModel {
         Player player = null;
         int alive = 0;
         for (Player p : players) {
-            if (!p.getTank().isDead()) {
+            if (p.getTank().getLives() < 1) {
                 player = p;
                 alive++;
             }
@@ -96,5 +107,9 @@ public class AngryTanksModel {
             player = null;
         }
         return player;
+    }
+
+    public List<String> getPlayerNames() {
+        return playerNames;
     }
 }

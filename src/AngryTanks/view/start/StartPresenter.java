@@ -36,6 +36,9 @@ public class StartPresenter {
         view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                model.getPlayerNames().add(view.getName1().getText());
+                model.getPlayerNames().add(view.getName2().getText());
+                model.addPlayers();
                 // gameview en presenter aanmaken
                 gameView = new GameView();
                 gamePresenter = new GamePresenter(model, gameView);
