@@ -7,8 +7,10 @@ public class Tank {
     private boolean isDead;
     private Coordinates gunCoordinates;
     private List<Coordinates> tankCoordinates;
+    private boolean facingRight;
 
     public Tank(Coordinates coordinates, boolean facingRight) {
+        this.facingRight = facingRight;
         gunCoordinates = coordinates;
         tankCoordinates = new ArrayList<Coordinates>();
         tankCoordinates.add(coordinates);
@@ -78,5 +80,13 @@ public class Tank {
 
     public List<Coordinates> getTankCoordinates() {
         return tankCoordinates;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
+
+    public boolean isFacingRight() {
+        return facingRight;
     }
 }

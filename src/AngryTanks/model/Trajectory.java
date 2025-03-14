@@ -1,10 +1,13 @@
 package AngryTanks.model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Trajectory {
     private List<Coordinates> trajectory;
+    private ImpactType impactType;
+    private List<Coordinates> impactRadius;
 
     public Trajectory(Shot shot, Wind wind, Tank tank) {
         double y;
@@ -35,6 +38,39 @@ public class Trajectory {
 
     public List<Coordinates> getTrajectory() {
         return trajectory;
+    }
+
+    public ImpactType getImpactType() {
+        return impactType;
+    }
+
+    public void setImpactType(ImpactType impactType) {
+        this.impactType = impactType;
+    }
+
+    public List<Coordinates> getImpactRadius() {
+        return impactRadius;
+    }
+
+    public void setImpactRadius(Coordinates impactPoint, boolean isDirt) {
+        impactRadius = new LinkedList<Coordinates>();
+        int x = impactPoint.getX();
+        int y = impactPoint.getY();
+        impactRadius.add(new Coordinates(x, y));
+        impactRadius.add(new Coordinates(x + 1, y));
+        impactRadius.add(new Coordinates(x, y + 1));
+        impactRadius.add(new Coordinates(x - 1, y));
+        impactRadius.add(new Coordinates(x, y - 1));
+        if (isDirt) {
+            impactRadius.add(new Coordinates(x + 2, y));
+            impactRadius.add(new Coordinates(x, y + 2));
+            impactRadius.add(new Coordinates(x - 2, y));
+            impactRadius.add(new Coordinates(x, y - 2));
+            impactRadius.add(new Coordinates(x + 1, y + 1));
+            impactRadius.add(new Coordinates(x - 1, y - 1));
+            impactRadius.add(new Coordinates(x + 1, y - 1));
+            impactRadius.add(new Coordinates(x - 1, y + 1));
+        }
     }
 
     @Override

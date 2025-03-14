@@ -171,8 +171,8 @@ public class GameView extends BorderPane {
 
         angleSlider.setOrientation(Orientation.VERTICAL);
         angleSlider.setMin(0);
-        angleSlider.setMax(180);
-        angleSlider.setMajorTickUnit(180);
+        angleSlider.setMax(90);
+        angleSlider.setMajorTickUnit(90);
         angleSlider.setMinorTickCount(0);
         angleSlider.setBlockIncrement(1);
         angleSlider.setShowTickLabels(true);
