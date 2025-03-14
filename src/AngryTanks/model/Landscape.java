@@ -70,6 +70,7 @@ public class Landscape {
                 } else if (terrain[y][x] == '.') {
                     terrain[y][x] = 'X';
                     trajectory.setImpactRadius(new Coordinates(x, y), true);
+                    boolean tank = false;
                     for (Coordinates impactC : trajectory.getImpactRadius()) {
                         int impactX = impactC.getX();
                         int impactY = impactC.getY();
@@ -77,13 +78,17 @@ public class Landscape {
                             terrain[impactY][impactX] = '#';
                         }
                         if (terrain[impactY][impactX] == 'A') {
-                            return BLAST;
+                            tank = true;
                         }
+                    }
+                    if (tank) {
+                        return BLAST;
                     }
                     return LAND;
                 } else if (terrain[y][x] == '-') {
                     terrain[y][x] = 'X';
                     trajectory.setImpactRadius(new Coordinates(x, y), false);
+                    boolean tank = false;
                     for (Coordinates impactC : trajectory.getImpactRadius()) {
                         int impactX = impactC.getX();
                         int impactY = impactC.getY();
@@ -91,8 +96,11 @@ public class Landscape {
                             terrain[impactY][impactX] = '#';
                         }
                         if (terrain[impactY][impactX] == 'A') {
-                            return BLAST;
+                            tank = true;
                         }
+                    }
+                    if (tank) {
+                        return BLAST;
                     }
                     return LAND;
                 } else if (terrain[y][x] == 'A') {
