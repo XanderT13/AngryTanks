@@ -10,15 +10,20 @@ public class AngryTanksModel {
     private Wind wind;
     private Landscape landscape;
     private Player activePlayer;
+    private List<String> playerNames;
 
-    public AngryTanksModel(int amount) {
-        players = new ArrayList<Player>();
+    public AngryTanksModel() {
+        players = new ArrayList<>();
         wind = new Wind();
         landscape = new Landscape();
-        for (int i = 0; i < amount; i++) {
-            String playerName = "Player " + (i + 1);
+        playerNames = new ArrayList<>();
+    }
+
+    public void addPlayers() {
+        for (int i = 0; i < playerNames.size(); i++) {
+            String playerName = playerNames.get(i);
             char[][] terrain = landscape.getTerrain();
-            int x = terrain[0].length / (amount - 1);
+            int x = terrain[0].length / (playerNames.size() - 1);
             int x2 = 0;
             if (i != 0) {
                 x2 = 1;
@@ -96,5 +101,9 @@ public class AngryTanksModel {
             player = null;
         }
         return player;
+    }
+
+    public List<String> getPlayerNames() {
+        return playerNames;
     }
 }

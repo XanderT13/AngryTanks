@@ -36,6 +36,8 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
+        view.getPlayer1Label().setText(model.getPlayerNames().get(0));
+        view.getPlayer2Label().setText(model.getPlayerNames().get(1));
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
