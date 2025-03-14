@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.WindowEvent;
@@ -15,6 +17,7 @@ public class GamePresenter {
     private AngryTanksModel model;
     private GameView view;
     private StartView startView;
+    private MediaPlayer fireSoundPlayer;
 
     public GamePresenter(AngryTanksModel model, GameView view) {
         this.model = model;
@@ -27,14 +30,30 @@ public class GamePresenter {
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                playFireSound();
                 model.nextTurn(view.getAngleSlider().getValue(),view.getVelocitySlider().getValue());
                 updateView();
             }
         });
-        // Koppelt event handlers (anon. inner klassen)
-        // aan de controls uit de view.
-        // Event handlers: roepen methodes aan uit het
-        // model en zorgen voor een update van de view.
+    }
+
+    private void loadFireSound() {
+        try {
+            // Laad het geluidsbestand vanuit de resources map
+            String soundPath = getClass().getResource("/tank_firing.mp3").toExternalForm();
+            Media fireSound = new Media(soundPath);
+            fireSoundPlayer = new MediaPlayer(fireSound);
+            fireSoundPlayer.setVolume(1.0);
+        } catch (Exception e) {
+            System.err.println("Kon het geluidsbestand niet laden: " + e.getMessage());
+        }
+    }
+
+    private void playFireSound() {
+        if (fireSoundPlayer != null) {
+            fireSoundPlayer.stop(); // Stop het geluid als het al speelt
+            fireSoundPlayer.play(); // Speel het geluid af
+        }
     }
 
     private void updateView() {
