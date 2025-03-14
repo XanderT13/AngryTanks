@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Settings2View extends BorderPane {
     private Slider volumeSlider;
+    private Button backButton;
 
     public Settings2View() {
         this.initialiseNodes();
@@ -14,6 +15,7 @@ public class Settings2View extends BorderPane {
 
     private void initialiseNodes() {
         volumeSlider = new Slider();
+        backButton = new Button("Back");
     }
 
     private void layoutNodes() {
@@ -25,7 +27,22 @@ public class Settings2View extends BorderPane {
         volumeSlider.setMajorTickUnit(0.01);
         volumeSlider.setMinorTickCount(0);
 
+        backButton.setPrefSize(75, 75);
+        backButton.setOnMouseEntered(e -> backButton.setStyle(
+                "-fx-border-color: Black;" +
+                        "-fx-border-width: 2;"
+        ));
+
         this.setCenter(volumeSlider);
+        this.setBottom(backButton);
+    }
+
+    Slider getVolumeSlider() {
+        return volumeSlider;
+    }
+
+    Button getBackButton() {
+        return backButton;
     }
 }
 

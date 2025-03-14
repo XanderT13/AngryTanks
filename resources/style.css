@@ -11,7 +11,7 @@
 }
 
 .end-view {
-    -f-background-image :url("/endscreen.png");
+    -fx-background-image :url("/endscreen.png");
     -fx-background-size: cover;
     -fx-background-position: center;
 }
@@ -63,4 +63,9 @@
 .tankslider .axis {
     -fx-tick-label-fill: black;
     -fx-font-weight: bold;
+}
+
+.winnaarlabel {
+    -fx-background-color: white;
+    -fx-font-size: 100px;
 }

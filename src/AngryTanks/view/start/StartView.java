@@ -36,8 +36,6 @@ public class StartView extends GridPane {
         // adding stylesheet
         this.getStylesheets().add("/style.css");
         this.setAlignment(Pos.CENTER);
-        this.setHgap(10);
-        this.setVgap(10);
         // achtergrond via CSS
         this.getStyleClass().add("start-view");
 

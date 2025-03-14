@@ -4,10 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 
-
-public class EndView extends BorderPane {
+public class EndView extends GridPane {
     // private Node attributen (controls)
     private Label winnaarLabel;
     private ImageView endImage;
@@ -27,7 +27,10 @@ public class EndView extends BorderPane {
     private void layoutNodes() {
         this.getStylesheets().add("/style.css");
         this.getStyleClass().add("end-view");
-        this.setCenter(winnaarLabel);
+        this.setAlignment(Pos.CENTER);
+
+        winnaarLabel.getStyleClass().add("winnaarlabel");
+        this.add(winnaarLabel, 0,0);
     }
     // implementatie van de nodige
     // package-private Getters

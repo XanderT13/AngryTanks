@@ -4,9 +4,12 @@ import AngryTanks.model.AngryTanksModel;
 import AngryTanks.model.Landscape;
 import AngryTanks.view.end.EndPresenter;
 import AngryTanks.view.end.EndView;
+import AngryTanks.view.settings2.Settings2Presenter;
+import AngryTanks.view.settings2.Settings2View;
 import AngryTanks.view.start.StartView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,6 +30,9 @@ public class GamePresenter {
     private MediaPlayer fireSoundPlayer;
     private EndView endView;
     private EndPresenter endPresenter;
+    private Settings2View settingsView;
+    private Settings2Presenter settingsPresenter;
+    private double fireSoundVolume = 0.5;
 
     public GamePresenter(AngryTanksModel model, GameView view) {
         this.model = model;
@@ -43,7 +49,7 @@ public class GamePresenter {
                 String soundPath = getClass().getResource("/tank_firing.mp3").toExternalForm();
                 Media fireSound = new Media(soundPath);
                 fireSoundPlayer = new MediaPlayer(fireSound);
-                fireSoundPlayer.setVolume(1.0);
+                fireSoundPlayer.setVolume(fireSoundVolume);
                 fireSoundPlayer.play();
                 boolean endGame = model.nextTurn(view.getAngleSlider().getValue(), view.getVelocitySlider().getValue());
                 updateView();
@@ -54,7 +60,7 @@ public class GamePresenter {
                     Stage stage = new Stage();
                     // nieuwe scene op de stage zetten
                     stage.setScene(new Scene(endView));
-                    stage.setWidth(1200);
+                    stage.setWidth(1300);
                     stage.setHeight(800);
                     stage.setTitle("End Screen");
                     Timeline timeline = new Timeline(
@@ -66,6 +72,19 @@ public class GamePresenter {
                     timeline.setCycleCount(1);
                     timeline.play();
                 }
+            }
+        });
+        view.getSettingsButton().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                settingsView = new Settings2View();
+                settingsPresenter = new Settings2Presenter(model, settingsView, view, GamePresenter.this);
+                Stage stage = (Stage) view.getScene().getWindow();
+                stage.setScene(new Scene(settingsView));
+                stage.setWidth(1300);
+                stage.setHeight(800);
+                stage.setTitle("Settings Screen");
+                stage.show();
             }
         });
     }
@@ -111,5 +130,16 @@ public class GamePresenter {
                 }
             }
         });
+    }
+
+    public void setFireSoundVolume(double v) {
+        this.fireSoundVolume = v;
+        if (fireSoundPlayer != null) {
+            fireSoundPlayer.setVolume(v);
+        }
+    }
+
+    public double getFireSoundVolume() {
+        return fireSoundVolume;
     }
 }
