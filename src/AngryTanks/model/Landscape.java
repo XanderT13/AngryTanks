@@ -51,8 +51,7 @@ public class Landscape {
                     terrain[i][j] = '#';
                 } else if (terrain[i][j] == 'Y') {
                     terrain[i][j] = '/';
-                }
-                else if (terrain[i][j] == 'Z') {
+                } else if (terrain[i][j] == 'Z') {
                     terrain[i][j] = 'A';
                 }
             }

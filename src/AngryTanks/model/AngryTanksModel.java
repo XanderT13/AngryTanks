@@ -46,7 +46,7 @@ public class AngryTanksModel {
         } else {
             tr = activePlayer.playTurn(wind, angle, velocity);
         }
-        tr.setImpactType(landscape.updateLandscape(tr.getTrajectory()));
+        tr.setImpactType(landscape.updateLandscape(tr, activePlayer));
         if (tr.getImpactType() == HIT || tr.getImpactType() == BLAST) {
             for (Player player : players) {
                 if (player != activePlayer) {
