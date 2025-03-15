@@ -14,13 +14,16 @@ public class AngryTanksModel {
     private Landscape landscape;
     private Player activePlayer;
     private List<String> playerNames;
-    private DoubleProperty volume = new SimpleDoubleProperty(0.5);
+    private DoubleProperty volume;
+    public static int difficulty;
 
     public AngryTanksModel() {
         players = new ArrayList<>();
         wind = new Wind();
         landscape = new Landscape();
         playerNames = new ArrayList<>();
+        difficulty = 1;
+        volume = new SimpleDoubleProperty(0.5);
     }
 
     public DoubleProperty volumeProperty() {
@@ -127,5 +130,9 @@ public class AngryTanksModel {
 
     public List<String> getPlayerNames() {
         return playerNames;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

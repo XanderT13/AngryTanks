@@ -196,6 +196,9 @@ public class GameView extends BorderPane {
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.add(angleSliderLabel, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
+
+        //gameGrid
+
         // spicing up the fireButton
         fireButton.setPrefSize(80,80);
         fireButton.setStyle("-fx-background-color: lightcoral;" +

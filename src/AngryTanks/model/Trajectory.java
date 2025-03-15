@@ -61,15 +61,32 @@ public class Trajectory {
         impactRadius.add(new Coordinates(x, y + 1));
         impactRadius.add(new Coordinates(x - 1, y));
         impactRadius.add(new Coordinates(x, y - 1));
-        if (isDirt) {
-            impactRadius.add(new Coordinates(x + 2, y));
-            impactRadius.add(new Coordinates(x, y + 2));
-            impactRadius.add(new Coordinates(x - 2, y));
-            impactRadius.add(new Coordinates(x, y - 2));
-            impactRadius.add(new Coordinates(x + 1, y + 1));
-            impactRadius.add(new Coordinates(x - 1, y - 1));
-            impactRadius.add(new Coordinates(x + 1, y - 1));
-            impactRadius.add(new Coordinates(x - 1, y + 1));
+        for (int i = 1; i < (5 - AngryTanksModel.difficulty + (isDirt ? 0 : -1)); i++) {
+            impactRadius.add(new Coordinates(x + i + 1, y));
+            impactRadius.add(new Coordinates(x, y + i + 1));
+            impactRadius.add(new Coordinates(x - i - 1, y));
+            impactRadius.add(new Coordinates(x, y - i - 1));
+            if (i == 1) {
+                impactRadius.add(new Coordinates(x + i, y + i));
+                impactRadius.add(new Coordinates(x - i, y - i));
+                impactRadius.add(new Coordinates(x + i, y - i));
+                impactRadius.add(new Coordinates(x - i, y + i));
+            } else {
+                impactRadius.add(new Coordinates(x + i, y + i - (i - 1)));
+                impactRadius.add(new Coordinates(x + i - (i - 1), y + i));
+                impactRadius.add(new Coordinates(x - i, y - i + (i - 1)));
+                impactRadius.add(new Coordinates(x - i + (i - 1), y - i));
+                impactRadius.add(new Coordinates(x - i, y + i - (i - 1)));
+                impactRadius.add(new Coordinates(x - i + (i - 1), y + i));
+                impactRadius.add(new Coordinates(x + i, y - i + (i - 1)));
+                impactRadius.add(new Coordinates(x + i - (i - 1), y - i));
+                if (i == 3) {
+                    impactRadius.add(new Coordinates(x + i - 1, y + i - 1));
+                    impactRadius.add(new Coordinates(x - i + 1, y - i + 1));
+                    impactRadius.add(new Coordinates(x + i - 1, y - i + 1));
+                    impactRadius.add(new Coordinates(x - i + 1, y + i - 1));
+                }
+            }
         }
     }
 
