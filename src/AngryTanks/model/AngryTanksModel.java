@@ -16,6 +16,7 @@ public class AngryTanksModel {
     private List<String> playerNames;
     private DoubleProperty volume;
     public static int difficulty;
+    private GameHistory history;
 
     public AngryTanksModel() {
         players = new ArrayList<>();
@@ -24,6 +25,7 @@ public class AngryTanksModel {
         playerNames = new ArrayList<>();
         difficulty = 1;
         volume = new SimpleDoubleProperty(0.5);
+        history = new GameHistory();
     }
 
     public DoubleProperty volumeProperty() {
@@ -84,6 +86,7 @@ public class AngryTanksModel {
                 }
             }
         }
+        history.updateHistory(new Shot(angle, velocity), wind, tr, activePlayer);
         wind.generateWind();
         if (checkWinner() != null) {
             return true;
@@ -136,7 +139,15 @@ public class AngryTanksModel {
         this.difficulty = difficulty;
     }
 
-    public void eliminateWind(int windValue){
+    public void eliminateWind(int windValue) {
         wind.setWindOff(windValue);
+    }
+
+    public GameHistory getHistory() {
+        return history;
+    }
+
+    public static int getDifficulty() {
+        return difficulty;
     }
 }
