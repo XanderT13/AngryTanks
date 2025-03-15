@@ -47,6 +47,13 @@ public class SettingsPresenter {
                 model.setDifficulty((int) view.getDifficultySlider().getValue());
             }
         });
+
+        view.getWindSlider().setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                model.eliminateWind((int) view.getWindSlider().getValue());
+            }
+        });
     }
 
     private void updateView() {
