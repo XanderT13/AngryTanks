@@ -57,7 +57,7 @@ public class SettingsView extends GridPane {
         difficultySlider.getStyleClass().add("tankslider");
         difficultySlider.setMaxWidth(400);;
         difficultySlider.setMin(1);
-        difficultySlider.setMax(5);
+        difficultySlider.setMax(3);
         difficultySlider.setShowTickLabels(true);
         difficultySlider.setShowTickMarks(true);
         difficultySlider.setMajorTickUnit(1);
@@ -84,5 +84,13 @@ public class SettingsView extends GridPane {
 
     Button getBackButton() {
         return backButton;
+    }
+
+    public Slider getDifficultySlider() {
+        return difficultySlider;
+    }
+
+    public Slider getWindSlider() {
+        return windSlider;
     }
 }
