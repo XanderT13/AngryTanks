@@ -94,7 +94,7 @@ public class Trajectory {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Trajectory: ");
+        sb.append("Trajectory{");
         int j;
         if (trajectory.size() <= 10) {
             j = trajectory.size() - 1;
@@ -104,6 +104,7 @@ public class Trajectory {
         for (int i = 0; i < j; i++) {
             sb.append("[" + trajectory.get(i).getX() + "," + trajectory.get(i).getY() + "]");
         }
+        sb.append("}");
         return sb.toString();
     }
 }

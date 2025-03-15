@@ -44,6 +44,6 @@ public class Wind {
 
     @Override
     public String toString() {
-        return String.format("WIND: %.1f: %s", power, direction);
+        return String.format("WIND{power=%.1f, direction=%s}", power, direction);
     }
 }

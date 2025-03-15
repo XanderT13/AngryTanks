@@ -1,26 +1,28 @@
 package AngryTanks.model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameHistory {
-    private List<Landscape> landscapes;
-    private List<Shot> schots;
+    private List<Shot> shots;
     private List<Wind> winds;
     private List<Trajectory> trajectories;
+    private List<Player> activePlayers;
 
     //constructor
     public GameHistory() {
-        landscapes = new LinkedList<>();
-        schots = new LinkedList<>();
-        winds = new LinkedList<>();
-        trajectories = new LinkedList<>();
+        shots = new ArrayList<>();
+        winds = new ArrayList<>();
+        trajectories = new ArrayList<>();
+        activePlayers = new ArrayList<>();
     }
 
-    public void updateHistory(Landscape l, Shot s, Wind w, Trajectory t) {
-        landscapes.add(l);
-        schots.add(s);
+    public void updateHistory(Shot s, Wind w, Trajectory t, Player p) {
+        shots.add(s);
         winds.add(w);
         trajectories.add(t);
+        activePlayers.add(p);
+        int turn = trajectories.size();
+        System.out.println("Turn " + turn + ": " + p + " " + s + " " + w + " ImpactType{" + t.getImpactType() + "} " + t);
     }
 }

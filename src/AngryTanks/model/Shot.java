@@ -16,4 +16,12 @@ public class Shot {
     public double getVelocity() {
         return velocity;
     }
+
+    @Override
+    public String toString() {
+        return "Shot{" +
+                "angle=" + Math.round(angle * 180/ Math.PI) +
+                ", velocity=" + Math.round(velocity) +
+                '}';
+    }
 }
