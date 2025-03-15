@@ -135,4 +135,8 @@ public class AngryTanksModel {
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
     }
+
+    public void eliminateWind(int windValue){
+        wind.setWindOff(windValue);
+    }
 }

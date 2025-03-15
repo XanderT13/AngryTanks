@@ -69,14 +69,15 @@ public class SettingsView extends GridPane {
 
         windSlider.getStyleClass().add("tankslider");
         windSlider.setMaxWidth(400);;
-        windSlider.setMin(1);
-        windSlider.setMax(5);
+        windSlider.setMin(0);
+        windSlider.setMax(1);
         windSlider.setShowTickLabels(true);
         windSlider.setShowTickMarks(true);
         windSlider.setMajorTickUnit(1);
         windSlider.setMinorTickCount(0);
         windSlider.setBlockIncrement(1);
         windSlider.setSnapToTicks(true);
+        windSlider.setValue(1);
         this.add(windSlider, 1, 2);
         this.setHalignment(windSlider, HPos.CENTER);
 

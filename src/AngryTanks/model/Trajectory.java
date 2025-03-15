@@ -15,6 +15,7 @@ public class Trajectory {
         double windPower = switch (wind.getDirection()) {
             case LEFT -> -wind.getPower();
             case RIGHT -> wind.getPower();
+            default -> 0;
         };
         if (shot.getAngle() < Math.PI / 2) {
             for (int x = 0; x < 200 - tank.getCoordinaten().getX(); x++) {
