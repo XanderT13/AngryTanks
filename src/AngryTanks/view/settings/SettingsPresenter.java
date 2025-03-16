@@ -34,8 +34,11 @@ public class SettingsPresenter {
                 StartView newStartview = new StartView();
                 StartPresenter startPresenter = new StartPresenter(model, newStartview);
                 Stage stage = (Stage) view.getScene().getWindow();
-                stage.setScene(new Scene(newStartview));
+                Scene scene = startView.getScene();
+                stage.setScene(scene);
                 newStartview.setPrefSize(1300, 800);
+                newStartview.getName1().setText(model.getPlayers().getFirst().getName());
+                newStartview.getName2().setText(model.getPlayers().getLast().getName());
                 stage.sizeToScene();
                 stage.setTitle("Start Screen");
                 stage.show();
@@ -57,7 +60,6 @@ public class SettingsPresenter {
     }
 
     private void updateView() {
-
     }
 
     public void addWindowEventHandlers() {

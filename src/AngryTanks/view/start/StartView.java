@@ -111,10 +111,10 @@ public class StartView extends GridPane {
     Button getSettingsButton() {
         return settingsButton;
     }
-    TextField getName1() {
+    public TextField getName1() {
         return name1;
     }
-    TextField getName2() {
+    public TextField getName2() {
         return name2;
     }
 

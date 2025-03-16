@@ -58,30 +58,6 @@ public class GameView extends BorderPane {
         layoutNodes();
     }
 
-
-    public void drawTerrain(char[][] terrain) {
-        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
-            String line;
-            int row = 0;
-
-            while ((line = br.readLine()) != null && row < 120) {
-                for (int col = 0; col < Math.min(line.length(), 200); col++) {
-                    char ch = line.charAt(col);
-                    Rectangle rect = new Rectangle(5, 5);
-                    if (ch == '-') rect.setFill(Color.DARKGRAY);
-                    if (ch == '.') rect.setFill(Color.DARKGREEN);
-                    if (ch == '#') rect.setFill(Color.LIGHTBLUE);
-                    if (ch == '/') rect.setFill(Color.YELLOW);
-                    if (ch == 'X') rect.setFill(Color.BLACK);
-                    gameGrid.add(rect, col, row);
-                }
-                row++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void initialiseNodes() {
         // Initialisatie van de Nodes
         // bvb.:
@@ -117,7 +93,7 @@ public class GameView extends BorderPane {
                     (velocitySlider.getMax() - velocitySlider.getMin()))
                     * velocitySlider.getHeight();
 
-            velSliderLabel.setTranslateY(thumbY - 175); // Adjust positioning
+            velSliderLabel.setTranslateY(thumbY - 125); // Adjust positioning
             velSliderLabel.setTranslateX(10);
         });
         // Ensure correct starting position
@@ -125,7 +101,7 @@ public class GameView extends BorderPane {
             double initialY = ((velocitySlider.getMax() - velocitySlider.getValue()) /
                     (velocitySlider.getMax() - velocitySlider.getMin()))
                     * velocitySlider.getHeight();
-            velSliderLabel.setTranslateY(initialY - 175);
+            velSliderLabel.setTranslateY(initialY - 125);
             velSliderLabel.setTranslateX(10);
         });
 
@@ -136,7 +112,7 @@ public class GameView extends BorderPane {
                     (angleSlider.getMax() - angleSlider.getMin()))
                     * angleSlider.getHeight();
 
-            angleSliderLabel.setTranslateY(thumbY -175); // Adjust positioning
+            angleSliderLabel.setTranslateY(thumbY -125); // Adjust positioning
             angleSliderLabel.setTranslateX(10);
         });
         // Ensure correct starting position
@@ -144,7 +120,7 @@ public class GameView extends BorderPane {
             double initialY = ((angleSlider.getMax() - angleSlider.getValue()) /
                     (angleSlider.getMax() - angleSlider.getMin()))
                     * angleSlider.getHeight();
-            angleSliderLabel.setTranslateY(initialY - 175);
+            angleSliderLabel.setTranslateY(initialY - 125);
             angleSliderLabel.setTranslateX(10);
         });
 

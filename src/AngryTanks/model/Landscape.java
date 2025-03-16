@@ -56,9 +56,6 @@ public class Landscape {
                 }
             }
         }
-        for (Coordinates cPlayer : activePlayer.getTank().getTankCoordinates()) {
-            terrain[cPlayer.getY()][cPlayer.getX()] = 'Z';
-        }
         for (Coordinates c : trajectory.getTrajectory()) {
             int y = terrain.length - 1 - c.getY();
             int x = c.getX();
@@ -109,5 +106,11 @@ public class Landscape {
             }
         }
         return MISS;
+    }
+
+    public void switchColorTank(Player activePlayer) {
+        for (Coordinates cPlayer : activePlayer.getTank().getTankCoordinates()) {
+            terrain[cPlayer.getY()][cPlayer.getX()] = 'Z';
+        }
     }
 }

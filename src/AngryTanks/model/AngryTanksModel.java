@@ -20,6 +20,8 @@ public class AngryTanksModel {
 
     public AngryTanksModel() {
         players = new ArrayList<>();
+        players.add(new Player("", new Tank(new Coordinates(0,0), true)));
+        players.add(new Player("", new Tank(new Coordinates(0,0), true)));
         wind = new Wind();
         landscape = new Landscape();
         playerNames = new ArrayList<>();
@@ -57,12 +59,16 @@ public class AngryTanksModel {
                     } else {
                         y = -7;
                     }
-                    players.add(new Player(playerName, new Tank(new Coordinates(i * x - x2 + y, j - 6), i * x - x2 < terrain[0].length / 2)));
+                    players.get(i).setName(playerName);
+                    players.get(i).getTank().setGunCoordinates(new Coordinates(i * x - x2 + y, j - 6));
+                    players.get(i).getTank().setFacingRight(i * x - x2 < terrain[0].length / 2);
+                    players.get(i).getTank().drawTank();
                 }
             }
         }
         activePlayer = players.get(0);
         landscape.addTanks(players);
+        landscape.switchColorTank(activePlayer);
     }
 
     public boolean nextTurn(double angle, double velocity) {
@@ -94,6 +100,7 @@ public class AngryTanksModel {
         for (Player player : players) {
             if (activePlayer != player) {
                 activePlayer = player;
+                landscape.switchColorTank(activePlayer);
                 return false;
             }
         }

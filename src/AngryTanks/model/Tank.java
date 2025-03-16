@@ -14,6 +14,10 @@ public class Tank {
         gunCoordinates = coordinates;
         tankCoordinates = new ArrayList<Coordinates>();
         tankCoordinates.add(coordinates);
+        lives = 3;
+    }
+
+    public void drawTank() {
         int gunX = gunCoordinates.getX();
         int gunY = gunCoordinates.getY();
         if (facingRight) {
@@ -67,7 +71,6 @@ public class Tank {
             tankCoordinates.add(new Coordinates(gunX + 6, gunY + 5));
             tankCoordinates.add(new Coordinates(gunX + 7, gunY + 4));
         }
-        lives = 3;
     }
 
     public int getLives() {
@@ -84,6 +87,14 @@ public class Tank {
 
     public List<Coordinates> getTankCoordinates() {
         return tankCoordinates;
+    }
+
+    public void setFacingRight(boolean facingRight) {
+        this.facingRight = facingRight;
+    }
+
+    public void setGunCoordinates(Coordinates gunCoordinates) {
+        this.gunCoordinates = gunCoordinates;
     }
 
     public boolean isFacingRight() {

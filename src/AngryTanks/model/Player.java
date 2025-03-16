@@ -23,6 +23,14 @@ public class Player {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTank(Tank tank) {
+        this.tank = tank;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
