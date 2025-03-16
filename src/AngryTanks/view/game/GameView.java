@@ -2,57 +2,28 @@ package AngryTanks.view.game;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class GameView extends BorderPane {
-    // private Node attributen (controls)
     private static final String CONTROL_BACKGROUND = "/controlGrid_back.png";
-    private Label player1Label;
-    private Label player2Label;
-    private Label previousTurn1;
-    private Label previousTurn2;
-    private Label windLabel;
-    private Label velocityLabel;
-    private Label angleLabel;
-    private Slider velocitySlider;
-    private Slider angleSlider;
-    private Button settingsButton;
-    private Button fireButton;
-    private HBox topBox;
-    private HBox healthBox1;
-    private HBox healthBox2;
-    private Circle life1;
-    private Circle life2;
-    private Circle life3;
-    private Circle life4;
-    private Circle life5;
-    private Circle life6;
-    private GridPane controlGrid;
-    private GridPane gameGrid;
-    private Label velSliderLabel;
-    private Label angleSliderLabel;
-    private BackgroundImage controlBackground;
-    private Image controlBackgroundImage;
+    private Label player1Label, player2Label, previousTurn1, previousTurn2, windLabel;
+    private Label velocityLabel, angleLabel, velSliderLabel, angleSliderLabel;
+    private Slider velocitySlider, angleSlider;
+    private Button settingsButton, fireButton;
+    private HBox topBox, healthBox1, healthBox2;
+    private Circle life1, life2, life3, life4, life5, life6;
+    private GridPane controlGrid, gameGrid;
 
     public GameView() {
         initialiseNodes();
@@ -60,293 +31,136 @@ public class GameView extends BorderPane {
     }
 
     private void initialiseNodes() {
-        // Initialisatie van de Nodes
-        // bvb.:
-        // button = new Button("...")
-        // label = new Label("...")
         player1Label = new Label("Player 1");
         player2Label = new Label("Player 2");
         previousTurn1 = new Label();
         previousTurn2 = new Label();
         windLabel = new Label("Wind");
-        velocitySlider = new Slider();
-        angleSlider = new Slider();
-        settingsButton = new Button();
-        fireButton = new Button("FIRE!");
-        controlGrid = new GridPane();
-        gameGrid = new GridPane();
         velocityLabel = new Label("Velocity");
         angleLabel = new Label("Angle");
+
+        velocitySlider = new Slider(0, 50, 25);
+        velocitySlider.setOrientation(Orientation.VERTICAL);
+        velocitySlider.getStyleClass().add("cool-slider");
+
+        angleSlider = new Slider(0, 90, 45);
+        angleSlider.setOrientation(Orientation.VERTICAL);
+        angleSlider.getStyleClass().add("cool-slider");
+
+        fireButton = new Button("FIRE!");
+        fireButton.getStyleClass().add("fire-button");
+
+        settingsButton = new Button();
+        settingsButton.getStyleClass().add("settings-button");
+
+        controlGrid = new GridPane();
+        gameGrid = new GridPane();
+
         life1 = new Circle(15, Color.GREEN);
         life2 = new Circle(15, Color.GREEN);
         life3 = new Circle(15, Color.GREEN);
         life4 = new Circle(15, Color.GREEN);
         life5 = new Circle(15, Color.GREEN);
         life6 = new Circle(15, Color.GREEN);
-        healthBox1 = new HBox(life1, life2, life3);
-        healthBox2 = new HBox(life4, life5, life6);
-        topBox = new HBox(previousTurn1, player1Label, healthBox1, windLabel, player2Label, healthBox2, previousTurn2);
-        controlBackgroundImage = new Image(getClass().getResource(CONTROL_BACKGROUND).toExternalForm());
-        controlBackground = new BackgroundImage(controlBackgroundImage, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(100,100,true,true,false,true));
-        controlGrid.setBackground(new Background(controlBackground));
+        healthBox1 = new HBox(2, life1, life2, life3);
+        healthBox1.setAlignment(Pos.CENTER);
+        healthBox2 = new HBox(2, life4, life5, life6);
+        healthBox2.setAlignment(Pos.CENTER);
 
-        velSliderLabel = new Label(String.format("%.0f", velocitySlider.getValue()));
+        topBox = new HBox(20, previousTurn1, player1Label, healthBox1, windLabel, player2Label, healthBox2, previousTurn2);
+        topBox.setAlignment(Pos.CENTER);
+        topBox.getStyleClass().add("top-box");
+
+        velSliderLabel = new Label();
         velSliderLabel.textProperty().bind(Bindings.format("%.0f", velocitySlider.valueProperty()));
-        velocitySlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            double thumbY = ((velocitySlider.getMax() - newVal.doubleValue()) /
-                    (velocitySlider.getMax() - velocitySlider.getMin()))
-                    * velocitySlider.getHeight();
+        velSliderLabel.getStyleClass().add("slider-label");
 
-            velSliderLabel.setTranslateY(thumbY - 125); // Adjust positioning
-            velSliderLabel.setTranslateX(10);
-        });
-        // Ensure correct starting position
-        Platform.runLater(() -> {
-            double initialY = ((velocitySlider.getMax() - velocitySlider.getValue()) /
-                    (velocitySlider.getMax() - velocitySlider.getMin()))
-                    * velocitySlider.getHeight();
-            velSliderLabel.setTranslateY(initialY - 125);
-            velSliderLabel.setTranslateX(10);
-        });
-
-        angleSliderLabel = new Label(String.format("%.0f", angleSlider.getValue()));
+        angleSliderLabel = new Label();
         angleSliderLabel.textProperty().bind(Bindings.format("%.0f", angleSlider.valueProperty()));
-        angleSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            double thumbY = ((angleSlider.getMax() - newVal.doubleValue()) /
-                    (angleSlider.getMax() - angleSlider.getMin()))
-                    * angleSlider.getHeight();
-
-            angleSliderLabel.setTranslateY(thumbY -125); // Adjust positioning
-            angleSliderLabel.setTranslateX(10);
-        });
-        // Ensure correct starting position
-        Platform.runLater(() -> {
-            double initialY = ((angleSlider.getMax() - angleSlider.getValue()) /
-                    (angleSlider.getMax() - angleSlider.getMin()))
-                    * angleSlider.getHeight();
-            angleSliderLabel.setTranslateY(initialY - 125);
-            angleSliderLabel.setTranslateX(10);
-        });
-
+        angleSliderLabel.getStyleClass().add("slider-label");
     }
 
     private void layoutNodes() {
-        // adding stylesheet
         this.getStylesheets().add("/style.css");
-        this.setPrefSize(1260,700);
-        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        // setting the parameters for the nodes inside the topBox
-        healthBox1.setAlignment(Pos.CENTER);
-        healthBox1.setSpacing(2);
-        healthBox2.setAlignment(Pos.CENTER);
-        healthBox2.setSpacing(2);
-        // aligning the topBox
-        topBox.setAlignment(Pos.CENTER);
-        topBox.setSpacing(20);
-        topBox.setMaxWidth(Double.MAX_VALUE);
-        HBox.setHgrow(topBox, Priority.ALWAYS);
-        topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
+        this.setPrefSize(1260, 700);
+        this.setPadding(new Insets(10));
 
-        gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-        // setting the parameters for the elements inside the controlGrid
-        velocitySlider.setOrientation(Orientation.VERTICAL);
-        velocitySlider.setMin(0);
-        velocitySlider.setMax(50);
-        velocitySlider.setMajorTickUnit(50);
-        velocitySlider.setMinorTickCount(0);
-        velocitySlider.setBlockIncrement(1);
-        velocitySlider.setShowTickLabels(true);
-        velocitySlider.getStyleClass().add("cool-slider");
-
-        angleSlider.setOrientation(Orientation.VERTICAL);
-        angleSlider.setMin(0);
-        angleSlider.setMax(90);
-        angleSlider.setMajorTickUnit(90);
-        angleSlider.setMinorTickCount(0);
-        angleSlider.setBlockIncrement(1);
-        angleSlider.setShowTickLabels(true);
-        angleSlider.getStyleClass().add("cool-slider");
-
-        // aligning and filling the controlGrid
-        controlGrid.setGridLinesVisible(true);
         controlGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        ColumnConstraints column1 = new ColumnConstraints(100);
-        column1.setHgrow(Priority.ALWAYS);
-        ColumnConstraints column2 = new ColumnConstraints(100);
-        column2.setHgrow(Priority.ALWAYS);
-        controlGrid.getColumnConstraints().addAll(column1, column2);
-        RowConstraints row1 = new RowConstraints();
-        row1.setVgrow(Priority.ALWAYS);
-        RowConstraints row2 = new RowConstraints();
-        row2.setVgrow(Priority.ALWAYS);
-        RowConstraints row3 = new RowConstraints(100);
-        row3.setVgrow(Priority.ALWAYS);
-        RowConstraints row4 = new RowConstraints(80);
-        row4.setVgrow(Priority.ALWAYS);
-        controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
+        controlGrid.getColumnConstraints().addAll(new ColumnConstraints(100), new ColumnConstraints(100));
+        controlGrid.getRowConstraints().addAll(new RowConstraints(), new RowConstraints(), new RowConstraints(100), new RowConstraints(80));
+
         controlGrid.add(velocityLabel, 0, 0);
         controlGrid.setHalignment(velocityLabel, HPos.CENTER);
         controlGrid.add(angleLabel, 1, 0);
         controlGrid.setHalignment(angleLabel, HPos.CENTER);
+
         controlGrid.add(velocitySlider, 0, 1);
         controlGrid.add(velSliderLabel, 0, 1);
         controlGrid.setHalignment(velocitySlider, HPos.CENTER);
+
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.add(angleSliderLabel, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
 
-
-        //gameGrid
-
-        // spicing up the fireButton
-        fireButton.setPrefSize(80,80);
-        fireButton.setStyle("-fx-background-color: lightcoral;" +
-                "-fx-text-fill: white; " +
-                "-fx-background-radius: 50; " + // Zorgt voor ronde knop
-                "-fx-min-width: 50px; " +
-                "-fx-min-height: 50px; " +
-                "-fx-border-radius: 50; " +
-                "-fx-border-color: darkred; " +
-                "-fx-border-width: 2;");
-        fireButton.setOnMouseEntered(e -> fireButton.setStyle(
-                "-fx-background-color: darkred; " +  // Donkerrood bij hover
-                        "-fx-text-fill: white; " +
-                        "-fx-background-radius: 50; " +
-                        "-fx-min-width: 50px; " +
-                        "-fx-min-height: 50px; " +
-                        "-fx-border-radius: 50; " +
-                        "-fx-border-color: darkred; " +
-                        "-fx-border-width: 2;"
-        ));
-        fireButton.setOnMouseExited(e -> fireButton.setStyle(
-                "-fx-background-color: lightcoral; " +  // Terug naar lichtrood
-                        "-fx-text-fill: white; " +
-                        "-fx-background-radius: 50; " +
-                        "-fx-min-width: 50px; " +
-                        "-fx-min-height: 50px; " +
-                        "-fx-border-radius: 50; " +
-                        "-fx-border-color: darkred; " +
-                        "-fx-border-width: 2;"
-        ));
-        controlGrid.add(fireButton, 0,2);
+        controlGrid.add(fireButton, 0, 2);
         controlGrid.setColumnSpan(fireButton, 2);
         controlGrid.setHalignment(fireButton, HPos.CENTER);
 
-        settingsButton.setPrefSize(75,75);
-        settingsButton.getStyleClass().add("settings-button");
-        settingsButton.setOnMouseEntered(e -> settingsButton.setStyle(
-                        "-fx-border-color: Black; " +
-                        "-fx-border-width: 2;"
-        ));
-        settingsButton.setOnMouseExited(e -> settingsButton.setStyle(
-                        "-fx-border-color: lightgray; " +
-                        "-fx-border-width: 2;"
-        ));
-        controlGrid.add(settingsButton, 0,3);
+        controlGrid.add(settingsButton, 0, 3);
         controlGrid.setColumnSpan(settingsButton, 2);
         controlGrid.setHalignment(settingsButton, HPos.CENTER);
 
-
-        // now we fill the BorderPane and align it
-        this.setPadding(new Insets(10, 10, 10, 10));
         this.setTop(topBox);
         this.setCenter(gameGrid);
         this.setRight(controlGrid);
-
     }
-    // implementatie van de nodige
-    // package-private Getters
 
-    Label getPlayer1Label() {
+Label getPlayer1Label() {
         return player1Label;
     }
 
-    Label getPlayer2Label() {
+     Label getPlayer2Label() {
         return player2Label;
     }
 
-    Label getWindLabel() {
-        return windLabel;
-    }
-
-    Label getVelocityLabel() {
-        return velocityLabel;
-    }
-
-    Label getAngleLabel() {
-        return angleLabel;
-    }
-
-    Slider getAngleSlider() {
-        return angleSlider;
-    }
-
-    Slider getVelocitySlider() {
-        return velocitySlider;
-    }
-
-    Button getSettingsButton() {
-        return settingsButton;
-    }
-
-    Button getFireButton() {
-        return fireButton;
-    }
-
-    Circle getLife1() {
-        return life1;
-    }
-
-    Circle getLife2() {
-        return life2;
-    }
-
-    Circle getLife3() {
-        return life3;
-    }
-
-    Circle getLife4() {
-        return life4;
-    }
-
-    Circle getLife5() {
-        return life5;
-    }
-
-    Circle getLife6() {
-        return life6;
-    }
-
-    HBox getTopBox() {
-        return topBox;
-    }
-
-    HBox getHealthBox1() {
-        return healthBox1;
-    }
-
-    HBox getHealthBox2() {
-        return healthBox2;
-    }
-
-    GridPane getControlGrid() {
-        return controlGrid;
-    }
-
-    GridPane getGameGrid() {
-        return gameGrid;
-    }
-
-    public Label getPreviousTurn1() {
+     Label getPreviousTurn1() {
         return previousTurn1;
     }
 
-    public Label getPreviousTurn2() {
+     Label getPreviousTurn2() {
         return previousTurn2;
     }
-}
 
+     Label getWindLabel() {
+        return windLabel;
+    }
+
+     Slider getVelocitySlider() {
+        return velocitySlider;
+    }
+
+     Slider getAngleSlider() {
+        return angleSlider;
+    }
+
+     Button getSettingsButton() {
+        return settingsButton;
+    }
+
+     Button getFireButton() {
+        return fireButton;
+    }
+
+     HBox getHealthBox1() {
+        return healthBox1;
+    }
+
+     HBox getHealthBox2() {
+        return healthBox2;
+    }
+
+     GridPane getGameGrid() {
+        return gameGrid;
+    }
+
+}
