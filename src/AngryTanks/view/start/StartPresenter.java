@@ -37,8 +37,18 @@ public class StartPresenter {
         view.getPlayButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                model.getPlayerNames().add(view.getName1().getText());
-                model.getPlayerNames().add(view.getName2().getText());
+                String player1 = view.getName1().getText();
+                String player2 = view.getName2().getText();
+                model.getPlayerNames().add(player1);
+                model.getPlayerNames().add(player2);
+                if (player1.isEmpty() || player2.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Invalid Input");
+                    alert.setContentText("Player names cannot be empty");
+                    alert.showAndWait();
+                    return;
+                }
                 model.addPlayers();
                 // gameview en presenter aanmaken
                 gameView = new GameView();
