@@ -1,5 +1,6 @@
 package AngryTanks.view.end;
 
+import AngryTanks.model.AngryTanksModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -9,8 +10,10 @@ import javafx.scene.layout.GridPane;
 
 public class EndView extends GridPane {
     // private Node attributen (controls)
-    private Label winnaarLabel;
+    private Label winnerLabel;
     private ImageView endImage;
+    private Label amountTurnsLabel;
+    private Label accuracyLabel;
 
     public EndView() {
         this.initialiseNodes();
@@ -21,7 +24,9 @@ public class EndView extends GridPane {
         // bvb.:
         // button = new Button("...")
         // label = new Label("...")
-        winnaarLabel = new Label();
+        winnerLabel = new Label();
+        amountTurnsLabel = new Label();
+        accuracyLabel = new Label();
         endImage = new ImageView();
     }
     private void layoutNodes() {
@@ -29,13 +34,23 @@ public class EndView extends GridPane {
         this.getStyleClass().add("end-view");
         this.setAlignment(Pos.CENTER);
 
-        winnaarLabel.getStyleClass().add("winnaarlabel");
-        this.add(winnaarLabel, 0,0);
+        winnerLabel.getStyleClass().add("winnaarlabel");
+        this.add(winnerLabel, 0,0);
+        this.add(amountTurnsLabel, 0,1);
+        this.add(accuracyLabel, 0,2);
     }
     // implementatie van de nodige
     // package-private Getters
 
-    public Label getWinnaarLabel() {
-        return winnaarLabel;
+    public Label getWinnerLabel() {
+        return winnerLabel;
+    }
+
+    public Label getAmountTurnsLabel() {
+        return amountTurnsLabel;
+    }
+
+    public Label getAccuracyLabel() {
+        return accuracyLabel;
     }
 }
