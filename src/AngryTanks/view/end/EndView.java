@@ -19,6 +19,7 @@ public class EndView extends GridPane {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
     private void initialiseNodes() {
         // Initialisatie van de Nodes
         // bvb.:
@@ -29,15 +30,18 @@ public class EndView extends GridPane {
         accuracyLabel = new Label();
         endImage = new ImageView();
     }
+
     private void layoutNodes() {
         this.getStylesheets().add("/style.css");
         this.getStyleClass().add("end-view");
         this.setAlignment(Pos.CENTER);
 
         winnerLabel.getStyleClass().add("winnaarlabel");
-        this.add(winnerLabel, 0,0);
-        this.add(amountTurnsLabel, 0,1);
-        this.add(accuracyLabel, 0,2);
+        this.add(winnerLabel, 0, 0);
+        amountTurnsLabel.getStyleClass().add("winnaarlabel");
+        this.add(amountTurnsLabel, 0, 1);
+        accuracyLabel.getStyleClass().add("winnaarlabel");
+        this.add(accuracyLabel, 0, 2);
     }
     // implementatie van de nodige
     // package-private Getters
