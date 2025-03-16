@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -25,7 +26,7 @@ import java.io.IOException;
 
 public class GameView extends BorderPane {
     // private Node attributen (controls)
-    private static final String FILENAME = "resources/landscape_120x200.txt";
+    private static final String CONTROL_BACKGROUND = "/controlGrid_back.png";
     private Label player1Label;
     private Label player2Label;
     private Label previousTurn1;
@@ -50,6 +51,8 @@ public class GameView extends BorderPane {
     private GridPane gameGrid;
     private Label velSliderLabel;
     private Label angleSliderLabel;
+    private BackgroundImage controlBackground;
+    private Image controlBackgroundImage;
 
     public GameView() {
         initialiseNodes();
@@ -83,6 +86,12 @@ public class GameView extends BorderPane {
         healthBox1 = new HBox(life1, life2, life3);
         healthBox2 = new HBox(life4, life5, life6);
         topBox = new HBox(previousTurn1, player1Label, healthBox1, windLabel, player2Label, healthBox2, previousTurn2);
+        controlBackgroundImage = new Image(getClass().getResource(CONTROL_BACKGROUND).toExternalForm());
+        controlBackground = new BackgroundImage(controlBackgroundImage, BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(100,100,true,true,false,true));
+        controlGrid.setBackground(new Background(controlBackground));
 
         velSliderLabel = new Label(String.format("%.0f", velocitySlider.getValue()));
         velSliderLabel.textProperty().bind(Bindings.format("%.0f", velocitySlider.valueProperty()));
@@ -127,7 +136,7 @@ public class GameView extends BorderPane {
     private void layoutNodes() {
         // adding stylesheet
         this.getStylesheets().add("/style.css");
-        this.setPrefSize(1300,800);
+        this.setPrefSize(1260,700);
         this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
@@ -174,9 +183,9 @@ public class GameView extends BorderPane {
         row1.setVgrow(Priority.ALWAYS);
         RowConstraints row2 = new RowConstraints();
         row2.setVgrow(Priority.ALWAYS);
-        RowConstraints row3 = new RowConstraints();
+        RowConstraints row3 = new RowConstraints(100);
         row3.setVgrow(Priority.ALWAYS);
-        RowConstraints row4 = new RowConstraints();
+        RowConstraints row4 = new RowConstraints(80);
         row4.setVgrow(Priority.ALWAYS);
         controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
         controlGrid.add(velocityLabel, 0, 0);
@@ -189,6 +198,7 @@ public class GameView extends BorderPane {
         controlGrid.add(angleSlider, 1, 1);
         controlGrid.add(angleSliderLabel, 1, 1);
         controlGrid.setHalignment(angleSlider, HPos.CENTER);
+
 
         //gameGrid
 
@@ -246,8 +256,6 @@ public class GameView extends BorderPane {
         this.setTop(topBox);
         this.setCenter(gameGrid);
         this.setRight(controlGrid);
-        this.setCenter(gameGrid);
-
 
     }
     // implementatie van de nodige
