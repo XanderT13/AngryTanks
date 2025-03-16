@@ -68,6 +68,7 @@ public class AngryTanksModel {
         }
         activePlayer = players.get(0);
         landscape.addTanks(players);
+        landscape.switchColorTank(activePlayer);
     }
 
     public boolean nextTurn(double angle, double velocity) {
@@ -99,6 +100,7 @@ public class AngryTanksModel {
         for (Player player : players) {
             if (activePlayer != player) {
                 activePlayer = player;
+                landscape.switchColorTank(activePlayer);
                 return false;
             }
         }
