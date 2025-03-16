@@ -51,7 +51,7 @@ public class GamePresenter {
         view.getFireButton().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                // geluid laden en afspelen met playFireSound()
+                fireSoundVolume = model.getVolume();
                 String soundPath = getClass().getResource("/tank_firing.mp3").toExternalForm();
                 Media fireSound = new Media(soundPath);
                 fireSoundPlayer = new MediaPlayer(fireSound);
@@ -170,14 +170,11 @@ public class GamePresenter {
         });
     }
 
-    public void setFireSoundVolume(double v) {
-        this.fireSoundVolume = v;
-        if (fireSoundPlayer != null) {
-            fireSoundPlayer.setVolume(v);
-        }
-    }
-
     public double getFireSoundVolume() {
         return fireSoundVolume;
+    }
+
+    public void setFireSoundVolume(double newVolume) {
+        fireSoundVolume = model.getVolume();
     }
 }

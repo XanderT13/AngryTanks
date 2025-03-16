@@ -68,9 +68,20 @@
 
 .play-button {
     -fx-background-color: green;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
     -fx-text-fill: black;
     -fx-border-color: black;
     -fx-border-width: 2;
+}
+
+.play-button:hover {
+    -fx-background-color: darkgreen;
+    -fx-border-color: gray;
+}
+
+.player-name {
+    -fx-max-width: 250px;
 }
 
 .tankslider .thumb {
