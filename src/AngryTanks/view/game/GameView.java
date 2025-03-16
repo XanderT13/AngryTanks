@@ -1,5 +1,6 @@
 package AngryTanks.view.game;
 
+import AngryTanks.model.AngryTanksModel;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -50,6 +51,7 @@ public class GameView extends BorderPane {
     private GridPane gameGrid;
     private Label velSliderLabel;
     private Label angleSliderLabel;
+    private AngryTanksModel model;
 
     public GameView() {
         initialiseNodes();
@@ -95,7 +97,7 @@ public class GameView extends BorderPane {
         settingsButton = new Button();
         fireButton = new Button("FIRE!");
         controlGrid = new GridPane();
-        gameGrid = new GridPane();
+
         velocityLabel = new Label("Velocity");
         angleLabel = new Label("Angle");
         life1 = new Circle(15, Color.GREEN);
@@ -163,6 +165,7 @@ public class GameView extends BorderPane {
         topBox.setSpacing(20);
         topBox.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(topBox, Priority.ALWAYS);
+        topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
 
         gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -176,6 +179,7 @@ public class GameView extends BorderPane {
         velocitySlider.setBlockIncrement(1);
         velocitySlider.setShowTickLabels(true);
         velocitySlider.getStyleClass().add("cool-slider");
+        velocitySlider.prefWidthProperty().bind(controlGrid.widthProperty().divide(2));
 
         angleSlider.setOrientation(Orientation.VERTICAL);
         angleSlider.setMin(0);
@@ -185,6 +189,8 @@ public class GameView extends BorderPane {
         angleSlider.setBlockIncrement(1);
         angleSlider.setShowTickLabels(true);
         angleSlider.getStyleClass().add("cool-slider");
+        angleSlider.prefWidthProperty().bind(controlGrid.widthProperty().divide(2));
+
 
         // aligning and filling the controlGrid
         controlGrid.setGridLinesVisible(true);
