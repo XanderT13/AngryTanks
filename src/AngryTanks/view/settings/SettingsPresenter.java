@@ -60,7 +60,6 @@ public class SettingsPresenter {
     }
 
     private void updateView() {
-
     }
 
     public void addWindowEventHandlers() {
