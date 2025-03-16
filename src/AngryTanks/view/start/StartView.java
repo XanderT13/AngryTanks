@@ -23,6 +23,7 @@ public class StartView extends GridPane {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
     private void initialiseNodes() {
         playButton = new Button("PLAY");
 
@@ -33,6 +34,7 @@ public class StartView extends GridPane {
         name1 = new TextField();
         name2 = new TextField();
     }
+
     private void layoutNodes() {
         // adding stylesheet
         this.getStylesheets().add("/style.css");
@@ -40,7 +42,7 @@ public class StartView extends GridPane {
         // achtergrond via CSS
         this.getStyleClass().add("start-view");
 
-        settingsButton.setPrefSize(75,75);
+        settingsButton.setPrefSize(75, 75);
         settingsButton.getStyleClass().add("settings-button");
         settingsButton.setOnMouseEntered(e -> settingsButton.setStyle(
                 "-fx-border-color: Black; " +
@@ -86,7 +88,7 @@ public class StartView extends GridPane {
                         "-fx-border-width: 2;"
         ));
         this.add(playButton, 1, 4);
-        playButton.setPrefSize(120,40);
+        playButton.setPrefSize(120, 40);
         GridPane.setHalignment(playButton, HPos.CENTER);
 
         GridPane.setColumnSpan(startSchermImage, 3);
@@ -99,8 +101,6 @@ public class StartView extends GridPane {
         name2.setMaxWidth(250);
         this.add(name2, 1, 2);
         this.setHalignment(name2, HPos.RIGHT);
-
-
     }
 
     // implementatie van de nodige
@@ -108,12 +108,15 @@ public class StartView extends GridPane {
     Button getPlayButton() {
         return playButton;
     }
+
     Button getSettingsButton() {
         return settingsButton;
     }
+
     public TextField getName1() {
         return name1;
     }
+
     public TextField getName2() {
         return name2;
     }
