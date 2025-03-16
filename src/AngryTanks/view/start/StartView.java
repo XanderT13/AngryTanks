@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class StartView extends GridPane {
@@ -52,16 +53,24 @@ public class StartView extends GridPane {
         this.add(settingsButton, 2, 4);
         GridPane.setHalignment(settingsButton, HPos.CENTER);
 
-        this.setGridLinesVisible(true);
-        ColumnConstraints column1 = new ColumnConstraints(250);
-        ColumnConstraints column2 = new ColumnConstraints(700);
-        ColumnConstraints column3 = new ColumnConstraints(250);
+        this.setGridLinesVisible(false);
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setHgrow(Priority.ALWAYS);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setHgrow(Priority.ALWAYS);
+        ColumnConstraints column3 = new ColumnConstraints();
+        column3.setHgrow(Priority.ALWAYS);
         this.getColumnConstraints().addAll(column1, column2, column3);
-        RowConstraints row1 = new RowConstraints(160);
-        RowConstraints row2 = new RowConstraints(160);
-        RowConstraints row3 = new RowConstraints(160);
-        RowConstraints row4 = new RowConstraints(160);
-        RowConstraints row5 = new RowConstraints(160);
+        RowConstraints row1 = new RowConstraints();
+        row1.setVgrow(Priority.ALWAYS);
+        RowConstraints row2 = new RowConstraints();
+        row2.setVgrow(Priority.ALWAYS);
+        RowConstraints row3 = new RowConstraints();
+        row3.setVgrow(Priority.ALWAYS);
+        RowConstraints row4 = new RowConstraints();
+        row4.setVgrow(Priority.ALWAYS);
+        RowConstraints row5 = new RowConstraints();
+        row5.setVgrow(Priority.ALWAYS);
         this.getRowConstraints().addAll(row1, row2, row3, row4, row5);
 
 

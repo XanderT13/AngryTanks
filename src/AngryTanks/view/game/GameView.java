@@ -147,6 +147,8 @@ public class GameView extends BorderPane {
     private void layoutNodes() {
         // adding stylesheet
         this.getStylesheets().add("/style.css");
+        this.setPrefSize(1300,800);
+        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         // setting the parameters for the nodes inside the topBox
         healthBox1.setAlignment(Pos.CENTER);
         healthBox1.setSpacing(2);
@@ -154,8 +156,12 @@ public class GameView extends BorderPane {
         healthBox2.setSpacing(2);
         // aligning the topBox
         topBox.setAlignment(Pos.CENTER);
+        topBox.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(topBox, Priority.ALWAYS);
         topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
+
+        gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         // setting the parameters for the elements inside the controlGrid
         velocitySlider.setOrientation(Orientation.VERTICAL);
@@ -178,13 +184,20 @@ public class GameView extends BorderPane {
 
         // aligning and filling the controlGrid
         controlGrid.setGridLinesVisible(true);
+        controlGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         ColumnConstraints column1 = new ColumnConstraints(100);
+        column1.setHgrow(Priority.ALWAYS);
         ColumnConstraints column2 = new ColumnConstraints(100);
+        column2.setHgrow(Priority.ALWAYS);
         controlGrid.getColumnConstraints().addAll(column1, column2);
-        RowConstraints row1 = new RowConstraints(50);
-        RowConstraints row2 = new RowConstraints(350);
-        RowConstraints row3 = new RowConstraints(100);
-        RowConstraints row4 = new RowConstraints(100);
+        RowConstraints row1 = new RowConstraints();
+        row1.setVgrow(Priority.ALWAYS);
+        RowConstraints row2 = new RowConstraints();
+        row2.setVgrow(Priority.ALWAYS);
+        RowConstraints row3 = new RowConstraints();
+        row3.setVgrow(Priority.ALWAYS);
+        RowConstraints row4 = new RowConstraints();
+        row4.setVgrow(Priority.ALWAYS);
         controlGrid.getRowConstraints().addAll(row1, row2, row3, row4);
         controlGrid.add(velocityLabel, 0, 0);
         controlGrid.setHalignment(velocityLabel, HPos.CENTER);

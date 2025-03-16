@@ -61,6 +61,7 @@ public class StartPresenter {
                 stage.setScene(new Scene(settingsView));
                 settingsView.setPrefSize(1300, 800);
                 stage.sizeToScene();
+                stage.setResizable(true);
                 settingsView.getScene().getWindow().sizeToScene();
                 stage.setTitle("Settings Screen");
                 stage.show();

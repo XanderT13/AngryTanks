@@ -30,6 +30,7 @@ public class GamePresenter {
     private GameView view;
     private StartView startView;
     private MediaPlayer fireSoundPlayer;
+    private MediaPlayer endSoundPlayer;
     private EndView endView;
     private EndPresenter endPresenter;
     private Settings2View settingsView;
@@ -69,6 +70,12 @@ public class GamePresenter {
                 }
                 updateView();
                 if (endGame) {
+                    String endSoundPath = getClass().getResource("/victory.mp3").toExternalForm();
+                    Media endSound = new Media(endSoundPath);
+                    endSoundPlayer = new MediaPlayer(endSound);
+                    endSoundPlayer.setVolume(fireSoundVolume);
+                    endSoundPlayer.play();
+
                     endView = new EndView();
                     endPresenter = new EndPresenter(model, endView);
                     // huidige stage (scherm) ophalen
@@ -76,6 +83,7 @@ public class GamePresenter {
                     // nieuwe scene op de stage zetten
                     stage.setScene(new Scene(endView));
                     endView.setPrefSize(1300, 800);
+                    stage.setResizable(true);
                     stage.sizeToScene();
                     stage.setTitle("End Screen");
                     Timeline timeline = new Timeline(

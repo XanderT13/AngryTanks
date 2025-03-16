@@ -17,6 +17,7 @@ public class Main extends Application {
         StartPresenter presenter = new StartPresenter(model, view);
         primaryStage.setTitle("Angry Tanks Start Screen");
         primaryStage.setScene(new Scene(view));
+        primaryStage.setResizable(true);
         primaryStage.sizeToScene();
         presenter.addWindowEventHandlers();
         primaryStage.show();
