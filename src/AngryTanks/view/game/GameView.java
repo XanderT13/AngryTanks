@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class GameView extends BorderPane {
-    private static final String CONTROL_BACKGROUND = "/controlGrid_back.png";
     private Label player1Label, player2Label, previousTurn1, previousTurn2, windLabel;
     private Label velocityLabel, angleLabel, velSliderLabel, angleSliderLabel;
     private Slider velocitySlider, angleSlider;
