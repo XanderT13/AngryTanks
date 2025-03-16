@@ -20,18 +20,14 @@ public class AngryTanksModel {
 
     public AngryTanksModel() {
         players = new ArrayList<>();
-        players.add(new Player("", new Tank(new Coordinates(0,0), true)));
-        players.add(new Player("", new Tank(new Coordinates(0,0), true)));
+        players.add(new Player("", new Tank(new Coordinates(0, 0), true)));
+        players.add(new Player("", new Tank(new Coordinates(0, 0), true)));
         wind = new Wind();
         landscape = new Landscape();
         playerNames = new ArrayList<>();
         difficulty = 1;
         volume = new SimpleDoubleProperty(0.5);
         history = new GameHistory();
-    }
-
-    public DoubleProperty volumeProperty() {
-        return volume;
     }
 
     public double getVolume() {
@@ -66,7 +62,7 @@ public class AngryTanksModel {
                 }
             }
         }
-        activePlayer = players.get(0);
+        activePlayer = players.getFirst();
         landscape.addTanks(players);
         landscape.switchColorTank(activePlayer);
     }
@@ -79,6 +75,16 @@ public class AngryTanksModel {
             tr = activePlayer.playTurn(wind, angle, velocity);
         }
         tr.setImpactType(landscape.updateLandscape(tr, activePlayer));
+        takeLives(tr);
+        history.updateHistory(new Shot(angle, velocity), wind, tr, activePlayer);
+        wind.generateWind();
+        if (checkWinner() != null) {
+            return true;
+        }
+        return switchActivePlayer();
+    }
+
+    private void takeLives(Trajectory tr) {
         if (tr.getImpactType() == HIT) {
             for (Player player : players) {
                 if (player != activePlayer) {
@@ -92,11 +98,9 @@ public class AngryTanksModel {
                 }
             }
         }
-        history.updateHistory(new Shot(angle, velocity), wind, tr, activePlayer);
-        wind.generateWind();
-        if (checkWinner() != null) {
-            return true;
-        }
+    }
+
+    private boolean switchActivePlayer() {
         for (Player player : players) {
             if (activePlayer != player) {
                 activePlayer = player;
@@ -152,9 +156,5 @@ public class AngryTanksModel {
 
     public GameHistory getHistory() {
         return history;
-    }
-
-    public static int getDifficulty() {
-        return difficulty;
     }
 }

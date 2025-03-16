@@ -45,17 +45,7 @@ public class Landscape {
     }
 
     public ImpactType updateLandscape(Trajectory trajectory, Player activePlayer) {
-        for (int i = 0; i < terrain.length; i++) {
-            for (int j = 0; j < terrain[0].length; j++) {
-                if (terrain[i][j] == 'X') {
-                    terrain[i][j] = '#';
-                } else if (terrain[i][j] == 'Y') {
-                    terrain[i][j] = '/';
-                } else if (terrain[i][j] == 'Z') {
-                    terrain[i][j] = 'A';
-                }
-            }
-        }
+        clearTrajectory();
         for (Coordinates c : trajectory.getTrajectory()) {
             int y = terrain.length - 1 - c.getY();
             int x = c.getX();
@@ -67,45 +57,49 @@ public class Landscape {
                 } else if (terrain[y][x] == '.') {
                     terrain[y][x] = 'X';
                     trajectory.setImpactRadius(new Coordinates(x, y), true);
-                    boolean tank = false;
-                    for (Coordinates impactC : trajectory.getImpactRadius()) {
-                        int impactX = impactC.getX();
-                        int impactY = impactC.getY();
-                        if (terrain[impactY][impactX] == '-' || terrain[impactY][impactX] == '.') {
-                            terrain[impactY][impactX] = '#';
-                        }
-                        if (terrain[impactY][impactX] == 'A') {
-                            tank = true;
-                        }
-                    }
-                    if (tank) {
-                        return BLAST;
-                    }
-                    return LAND;
+                    return returnImpactType(trajectory);
                 } else if (terrain[y][x] == '-') {
                     terrain[y][x] = 'X';
                     trajectory.setImpactRadius(new Coordinates(x, y), false);
-                    boolean tank = false;
-                    for (Coordinates impactC : trajectory.getImpactRadius()) {
-                        int impactX = impactC.getX();
-                        int impactY = impactC.getY();
-                        if (terrain[impactY][impactX] == '-' || terrain[impactY][impactX] == '.') {
-                            terrain[impactY][impactX] = '#';
-                        }
-                        if (terrain[impactY][impactX] == 'A') {
-                            tank = true;
-                        }
-                    }
-                    if (tank) {
-                        return BLAST;
-                    }
-                    return LAND;
+                    return returnImpactType(trajectory);
                 } else if (terrain[y][x] == 'A') {
                     return HIT;
                 }
             }
         }
         return MISS;
+    }
+
+    private ImpactType returnImpactType(Trajectory trajectory) {
+        boolean tank = false;
+        for (Coordinates impactC : trajectory.getImpactRadius()) {
+            int impactX = impactC.getX();
+            int impactY = impactC.getY();
+            if (terrain[impactY][impactX] == '-' || terrain[impactY][impactX] == '.') {
+                terrain[impactY][impactX] = '#';
+            }
+            if (terrain[impactY][impactX] == 'A') {
+                tank = true;
+            }
+        }
+        if (tank) {
+            return BLAST;
+        }
+        return LAND;
+    }
+
+    private void clearTrajectory() {
+        for (int i = 0; i < terrain.length; i++) {
+            for (int j = 0; j < terrain[0].length; j++) {
+                if (terrain[i][j] == 'X') {
+                    terrain[i][j] = '#';
+                } else if (terrain[i][j] == 'Y') {
+                    terrain[i][j] = '/';
+                } else if (terrain[i][j] == 'Z') {
+                    terrain[i][j] = 'A';
+                }
+            }
+        }
     }
 
     public void switchColorTank(Player activePlayer) {
