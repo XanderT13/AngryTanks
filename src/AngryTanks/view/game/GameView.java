@@ -144,7 +144,7 @@ public class GameView extends BorderPane {
         topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
 
-        gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
         // setting the parameters for the elements inside the controlGrid
         velocitySlider.setOrientation(Orientation.VERTICAL);
