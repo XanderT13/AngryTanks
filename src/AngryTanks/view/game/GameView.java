@@ -28,6 +28,8 @@ public class GameView extends BorderPane {
     private static final String FILENAME = "resources/landscape_120x200.txt";
     private Label player1Label;
     private Label player2Label;
+    private Label previousTurn1;
+    private Label previousTurn2;
     private Label windLabel;
     private Label velocityLabel;
     private Label angleLabel;
@@ -85,6 +87,8 @@ public class GameView extends BorderPane {
         // label = new Label("...")
         player1Label = new Label("Player 1");
         player2Label = new Label("Player 2");
+        previousTurn1 = new Label();
+        previousTurn2 = new Label();
         windLabel = new Label("Wind");
         velocitySlider = new Slider();
         angleSlider = new Slider();
@@ -102,7 +106,7 @@ public class GameView extends BorderPane {
         life6 = new Circle(15, Color.GREEN);
         healthBox1 = new HBox(life1, life2, life3);
         healthBox2 = new HBox(life4, life5, life6);
-        topBox = new HBox(player1Label, healthBox1, windLabel, player2Label, healthBox2);
+        topBox = new HBox(previousTurn1, player1Label, healthBox1, windLabel, player2Label, healthBox2, previousTurn2);
 
         velSliderLabel = new Label(String.format("%.0f", velocitySlider.getValue()));
         velSliderLabel.textProperty().bind(Bindings.format("%.0f", velocitySlider.valueProperty()));
@@ -156,9 +160,9 @@ public class GameView extends BorderPane {
         healthBox2.setSpacing(2);
         // aligning the topBox
         topBox.setAlignment(Pos.CENTER);
+        topBox.setSpacing(20);
         topBox.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(topBox, Priority.ALWAYS);
-        topBox.setSpacing(50);
         topBox.setStyle("-fx-border-color: black; -fx-border-width: 2");
 
         gameGrid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -351,6 +355,14 @@ public class GameView extends BorderPane {
 
     GridPane getGameGrid() {
         return gameGrid;
+    }
+
+    public Label getPreviousTurn1() {
+        return previousTurn1;
+    }
+
+    public Label getPreviousTurn2() {
+        return previousTurn2;
     }
 }
 

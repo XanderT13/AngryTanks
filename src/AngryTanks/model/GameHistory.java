@@ -25,4 +25,20 @@ public class GameHistory {
         int turn = trajectories.size();
         System.out.println("Turn " + turn + ": " + p + " " + s + " " + w + " ImpactType{" + t.getImpactType() + "} " + t);
     }
+
+    public List<Shot> getShots() {
+        return shots;
+    }
+
+    public List<Wind> getWinds() {
+        return winds;
+    }
+
+    public List<Trajectory> getTrajectories() {
+        return trajectories;
+    }
+
+    public List<Player> getActivePlayers() {
+        return activePlayers;
+    }
 }

@@ -68,6 +68,21 @@ public class GamePresenter {
                 for (int i = 0; i < player2.getTank().getLives(); i++) {
                     view.getHealthBox2().getChildren().add(new Circle(15, Color.GREEN));
                 }
+                StringBuilder sb = new StringBuilder("Previous turn: vel=");
+                sb.append(Math.round(model.getHistory().getShots().getLast().getVelocity()));
+                sb.append(" ang=");
+                sb.append(Math.round(model.getHistory().getShots().getLast().getAngle() * 180 / Math.PI));
+                sb.append(" wind=");
+                sb.append(Math.round(model.getHistory().getWinds().getLast().getPower()));
+                sb.append(" dir=");
+                sb.append(model.getHistory().getWinds().getLast().getDirection());
+                sb.append(" imp=");
+                sb.append(model.getHistory().getTrajectories().getLast().getImpactType());
+                if (model.getActivePlayer() == player2) {
+                    view.getPreviousTurn1().setText(sb.toString());
+                } else if (model.getActivePlayer() == player1) {
+                    view.getPreviousTurn2().setText(sb.toString());
+                }
                 updateView();
                 if (endGame) {
                     String endSoundPath = getClass().getResource("/victory.mp3").toExternalForm();
