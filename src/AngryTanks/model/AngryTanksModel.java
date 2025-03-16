@@ -3,6 +3,9 @@ package AngryTanks.model;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,7 @@ public class AngryTanksModel {
         difficulty = 1;
         volume = new SimpleDoubleProperty(0.5);
         history = new GameHistory();
+        history.writeToFile("Game:");
     }
 
     public double getVolume() {
@@ -39,7 +43,7 @@ public class AngryTanksModel {
     }
 
     public void addPlayers() {
-        for (int i = 0; i < playerNames.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             String playerName = playerNames.get(i);
             char[][] terrain = landscape.getTerrain();
             int x = terrain[0].length / (playerNames.size() - 1);
