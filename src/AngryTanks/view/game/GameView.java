@@ -100,7 +100,7 @@ public class GameView extends BorderPane {
                     (velocitySlider.getMax() - velocitySlider.getMin()))
                     * velocitySlider.getHeight();
 
-            velSliderLabel.setTranslateY(thumbY - 125); // Adjust positioning
+            velSliderLabel.setTranslateY(thumbY - 153); // Adjust positioning
             velSliderLabel.setTranslateX(10);
         });
         // Ensure correct starting position
@@ -108,7 +108,7 @@ public class GameView extends BorderPane {
             double initialY = ((velocitySlider.getMax() - velocitySlider.getValue()) /
                     (velocitySlider.getMax() - velocitySlider.getMin()))
                     * velocitySlider.getHeight();
-            velSliderLabel.setTranslateY(initialY - 125);
+            velSliderLabel.setTranslateY(initialY - 153);
             velSliderLabel.setTranslateX(10);
         });
 
@@ -119,7 +119,7 @@ public class GameView extends BorderPane {
                     (angleSlider.getMax() - angleSlider.getMin()))
                     * angleSlider.getHeight();
 
-            angleSliderLabel.setTranslateY(thumbY -125); // Adjust positioning
+            angleSliderLabel.setTranslateY(thumbY -153); // Adjust positioning
             angleSliderLabel.setTranslateX(10);
         });
         // Ensure correct starting position
@@ -127,7 +127,7 @@ public class GameView extends BorderPane {
             double initialY = ((angleSlider.getMax() - angleSlider.getValue()) /
                     (angleSlider.getMax() - angleSlider.getMin()))
                     * angleSlider.getHeight();
-            angleSliderLabel.setTranslateY(initialY - 125);
+            angleSliderLabel.setTranslateY(initialY - 153);
             angleSliderLabel.setTranslateX(10);
         });
 
