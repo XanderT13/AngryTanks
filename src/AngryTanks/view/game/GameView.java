@@ -56,30 +56,6 @@ public class GameView extends BorderPane {
         layoutNodes();
     }
 
-
-    public void drawTerrain(char[][] terrain) {
-        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
-            String line;
-            int row = 0;
-
-            while ((line = br.readLine()) != null && row < 120) {
-                for (int col = 0; col < Math.min(line.length(), 200); col++) {
-                    char ch = line.charAt(col);
-                    Rectangle rect = new Rectangle(5, 5);
-                    if (ch == '-') rect.setFill(Color.DARKGRAY);
-                    if (ch == '.') rect.setFill(Color.DARKGREEN);
-                    if (ch == '#') rect.setFill(Color.LIGHTBLUE);
-                    if (ch == '/') rect.setFill(Color.YELLOW);
-                    if (ch == 'X') rect.setFill(Color.BLACK);
-                    gameGrid.add(rect, col, row);
-                }
-                row++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void initialiseNodes() {
         // Initialisatie van de Nodes
         // bvb.:

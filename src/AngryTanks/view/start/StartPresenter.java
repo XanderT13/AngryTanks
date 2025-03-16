@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.InputEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -50,6 +51,18 @@ public class StartPresenter {
                 stage.sizeToScene();
                 stage.setTitle("Game Screen");
                 stage.show();
+            }
+        });
+        view.getName1().setOnInputMethodTextChanged(new EventHandler<InputEvent>() {
+            @Override
+            public void handle(InputEvent inputEvent) {
+                model.getPlayers().getFirst().setName(view.getName1().getText());
+            }
+        });
+        view.getName2().setOnInputMethodTextChanged(new EventHandler<InputEvent>() {
+            @Override
+            public void handle(InputEvent inputEvent) {
+                model.getPlayers().getLast().setName(view.getName2().getText());
             }
         });
         view.getSettingsButton().setOnAction(new EventHandler<ActionEvent>() {
