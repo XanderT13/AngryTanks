@@ -46,9 +46,11 @@ public class Settings2Presenter {
             @Override
             public void handle(ActionEvent actionEvent) {
                 // Zet de game terug naar het startscherm
+                GameView newGameView = new GameView();
+                GamePresenter gamePresenter1 = new GamePresenter(model, newGameView);
                 Stage stage = (Stage) view.getScene().getWindow();
-                stage.setScene(new Scene(gameView));
-                gameView.setPrefSize(1300, 800);
+                stage.setScene(new Scene(newGameView));
+                newGameView.setPrefSize(1260, 700);
                 stage.sizeToScene();
                 stage.setResizable(true);
                 stage.setTitle("Game Screen");

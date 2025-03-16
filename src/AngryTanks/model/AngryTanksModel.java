@@ -28,6 +28,7 @@ public class AngryTanksModel {
         difficulty = 1;
         volume = new SimpleDoubleProperty(0.5);
         history = new GameHistory();
+        history.writeToFile("Game: ");
     }
 
     public double getVolume() {
@@ -39,10 +40,10 @@ public class AngryTanksModel {
     }
 
     public void addPlayers() {
-        for (int i = 0; i < playerNames.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             String playerName = playerNames.get(i);
             char[][] terrain = landscape.getTerrain();
-            int x = terrain[0].length / (playerNames.size() - 1);
+            int x = terrain[0].length / (players.size() - 1);
             int x2 = 0;
             if (i != 0) {
                 x2 = 1;
