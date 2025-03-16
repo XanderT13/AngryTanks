@@ -27,6 +27,8 @@
     -fx-border-color: darkred;
     -fx-border-width: 2;
     -fx-border-radius: 10;
+    -fx-show-tick-labels: true;
+    -fx-pref-height: 400px;
 }
 
 .cool-slider .track {
@@ -41,13 +43,28 @@
     -fx-pref-height: 15px;
 }
 
+.slider-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-translate-x: 10px;
+}
+
 .settings-button {
     -fx-background-image: url("/settings-icon.jpeg");
     -fx-background-size: 100% 100%; /* Ensures the image fits */
     -fx-background-repeat: no-repeat;
     -fx-border-color: lightgray;
     -fx-border-width: 2;
+    -fx-pref-width: 75px;
+    -fx-pref-height: 75px;
 }
+
+.settings-button:hover {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
 
 .play-button {
     -fx-background-color: green;
@@ -75,4 +92,32 @@
 .winnaarlabel {
     -fx-background-color: lightgreen;
     -fx-font-size: 60px;
+}
+
+.top-box {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+    -fx-max-width: infinity;
+}
+
+.health-box {
+    -fx-alignment: center;
+    -fx-spacing: 2;
+}
+
+.fire-button {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+    -fx-background-radius: 50;
+    -fx-min-width: 75px;
+    -fx-min-height: 75px;
+    -fx-border-radius: 50;
+    -fx-border-color: darkred;
+    -fx-border-width: 2;
+}
+
+.fire-button:hover {
+    -fx-background-color: darkred;
 }
