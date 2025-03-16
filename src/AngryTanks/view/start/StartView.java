@@ -17,6 +17,7 @@ public class StartView extends GridPane {
     public StartView() {
         this.initialiseNodes();
         this.layoutNodes();
+
     }
 
     private void initialiseNodes() {
