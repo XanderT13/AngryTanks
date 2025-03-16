@@ -12,7 +12,7 @@ public class Tank {
     public Tank(Coordinates coordinates, boolean facingRight) {
         this.facingRight = facingRight;
         gunCoordinates = coordinates;
-        tankCoordinates = new ArrayList<Coordinates>();
+        tankCoordinates = new ArrayList<>();
         tankCoordinates.add(coordinates);
         lives = 3;
     }
