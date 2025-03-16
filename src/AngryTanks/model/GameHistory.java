@@ -23,7 +23,7 @@ public class GameHistory {
         trajectories.add(t);
         activePlayers.add(p);
         int turn = trajectories.size();
-        System.out.printf("Turn %d: %s %s %s ImpactType{%s} %s", turn, p, s, w, t.getImpactType(), t);
+        System.out.printf("Turn %d: %s %s %s ImpactType{%s} %s\n", turn, p, s, w, t.getImpactType(), t);
     }
 
     public List<Shot> getShots() {
