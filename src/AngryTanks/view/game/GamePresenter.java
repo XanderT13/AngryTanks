@@ -143,7 +143,7 @@ public class GamePresenter {
                     case 'A' -> rect.setFill(Color.RED);
                     default -> rect.setFill(Color.WHITE);
                 }
-                view.drawTerrain(model.getLandscape().getTerrain());
+                view.getGameGrid().add(rect, row, col);
             }
         }
     }
